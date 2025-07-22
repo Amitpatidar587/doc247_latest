@@ -1,0 +1,6 @@
+module Pods_nsp {
+  umbrella header "Pods-nsp-umbrella.h"
+
+  export *
+  module * { export * }
+}

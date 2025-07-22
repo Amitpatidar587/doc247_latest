@@ -1,0 +1,94 @@
+{
+  "id": 4,
+  "first_name": "Rajaram",
+  "last_name": "Patidar",
+  "email": "rahul@gmail.com",
+  "user_type": "rahul@gmail.com",
+  "total_awards": 1,
+  "total_education": ["BAMS", null],
+  "total_experience": 51.43874058863792,
+  "awards": [
+    {
+      "id": 24,
+      "doctor_id": 4,
+      "award_name": "Ifa",
+      "award_date": "2025-05-13",
+      "award_description": "Organized Patient Profile Components for better structure and reusability.\nIntegrated API call for fetching Medical Records with optimized state management and error handling.",
+      "is_active": true,
+      "created_at": "2025-05-19T08:53:20.235000Z",
+      "updated_at": "2025-05-22T12:13:52.107141Z"
+    }
+  ],
+  "education": [
+    {
+      "id": 12,
+      "doctor_id": 4,
+      "degree": "BAMS",
+      "institute_name": "BHU",
+      "course": "BHMS",
+      "course_start_date": "2012-05-11",
+      "course_end_date": "2025-05-05",
+      "passing_year": null,
+      "specialization": "Dental",
+      "certifications": null,
+      "education_type": "full_time",
+      "country": "India",
+      "created_at": "2025-05-09T06:06:38.906000Z",
+      "updated_at": "2025-05-19T08:51:43.582000Z"
+    },
+    {
+      "id": 17,
+      "doctor_id": 4,
+      "degree": null,
+      "institute_name": "DAVV",
+      "course": "Medico",
+      "course_start_date": "2020-06-19",
+      "course_end_date": "2024-11-19",
+      "passing_year": null,
+      "specialization": null,
+      "certifications": null,
+      "education_type": null,
+      "country": null,
+      "created_at": "2025-05-19T08:51:12.678000Z",
+      "updated_at": "2025-05-22T12:13:47.825719Z"
+    }
+  ],
+  "experience": [
+    {
+      "id": 24,
+      "doctor_id": 4,
+      "title": "General medicine",
+      "hospital_name": "stanford hospital",
+      "location": "indore",
+      "employment": "Part Time",
+      "job_description": "manage emergency patients",
+      "join_date": "2023-01-16",
+      "last_date": "2024-06-24",
+      "working_status": "active",
+      "achievements": null,
+      "currently_working": true,
+      "employment_type": "full_time",
+      "year_of_exp": 1.4373716632443532,
+      "created_at": "2025-04-24T09:11:57.440000Z",
+      "updated_at": "2025-05-19T08:43:16.774000Z"
+    },
+    {
+      "id": 33,
+      "doctor_id": 4,
+      "title": "DAVV",
+      "hospital_name": "Royal",
+      "location": "Fb",
+      "employment": "Part Time",
+      "job_description": "mjsvd msdvksjid msdkvjis dvufhv jnsdivs sjvisj",
+      "join_date": "1975-05-16",
+      "last_date": "2025-05-16",
+      "working_status": "active",
+      "achievements": null,
+      "currently_working": false,
+      "employment_type": "part_time",
+      "year_of_exp": 50.001368925393564,
+      "created_at": "2025-05-16T07:15:06.191000Z",
+      "updated_at": "2025-05-27T06:23:03.225134Z"
+    }
+  ]
+}
