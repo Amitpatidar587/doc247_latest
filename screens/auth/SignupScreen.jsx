@@ -186,11 +186,30 @@ const SignupScreen = ({ navigation, route }) => {
       {!showOtpInput && (
         <>
           <View style={styles.checkboxContainer}>
-            <Checkbox
+            <TouchableOpacity
+  onPress={() => handleChange('is_agreed', !formData.is_agreed)}
+  style={{
+    width: 24,
+    height: 24,
+    borderWidth: 1,
+    borderColor: '#aaa',
+    borderRadius: 4,
+    backgroundColor: formData.is_agreed ? '#4CAF50' : '#f5f5f5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 10,
+  }}
+>
+  {formData.is_agreed && (
+    <Text style={{ color: 'white', fontWeight: 'bold' }}>✓</Text>
+  )}
+</TouchableOpacity>
+            {/* <Checkbox
               status={formData.is_agreed ? "checked" : "unchecked"}
               onPress={() => handleChange("is_agreed", !formData.is_agreed)}
               color="#4CAF50"
-            />
+              style={{ marginRight: 10 , borderWidth: 1, borderColor: "#333", backgroundColor: "#ccc"}}
+            /> */}
             <Text style={styles.checkboxLabel}>
               I agree to the{" "}
               <Text style={styles.link} onPress={() => setTermsVisible(true)}>
@@ -302,6 +321,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 10,
     flexWrap: "wrap",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
   },
   checkboxLabel: {
     fontSize: 15,

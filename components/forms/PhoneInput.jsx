@@ -140,19 +140,20 @@ const styles = StyleSheet.create({
   },
   input: {
     fontSize: 16,
+    backgroundColor: "transparent",
   },
   codeContainer: {
-    minWidth: 80,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 8,
+    minWidth: 60,
+    // justifyContent: "flex-start",
+    alignItems: "stretch",
+    // paddingHorizontal: 8,
   },
 
   codeText: {
     fontSize: 16,
-    paddingHorizontal: 4,
-    flexShrink: 1,
-    textAlign: "center",
+    // paddingHorizontal: 4,
+    // flexShrink: 1,
+    // textAlign: "center",
     fontWeight: "bold",
     borderRightWidth: 1,
     borderRightColor: "black",

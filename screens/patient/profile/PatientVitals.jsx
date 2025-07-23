@@ -180,7 +180,7 @@ const PatientVitals = () => {
     <View
       style={[
         styles.container,
-        vitals?.length === 0 ? { paddingBottom: 160 } : { paddingBottom: 60 },
+        vitals?.length === 0 ? { paddingBottom: 60 } : { paddingBottom: 60 },
       ]}
     >
       {vitals?.length === 0 ? (
