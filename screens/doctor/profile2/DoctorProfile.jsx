@@ -10,8 +10,6 @@ const DoctorProfile = ({ route }) => {
   const { doctorData } = useSelector((state) => state.doctor);
   const dispatch = useDispatch();
 
-  console.log("doctorData", doctorData);
-
   useEffect(() => {
     dispatch(fetchDoctorDetails(userId));
   }, [dispatch]);

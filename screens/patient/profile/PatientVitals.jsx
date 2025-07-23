@@ -180,6 +180,7 @@ const PatientVitals = () => {
     <View
       style={[
         styles.container,
+        vitals?.length === 0 ? { paddingBottom: 160 } : { paddingBottom: 60 },
       ]}
     >
       {vitals?.length === 0 ? (
@@ -255,7 +256,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     // flex: 1,
     minHeight: "100%",
-    paddingBottom: 60,
   },
   fieldsContainer: {
     padding: 15,

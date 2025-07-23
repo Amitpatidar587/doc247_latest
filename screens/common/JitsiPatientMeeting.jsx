@@ -122,7 +122,6 @@ const JitsiPatientMeeting = ({
     (function() {
       function initAudio() {
         if (window.jitsiApi) {
-          console.log('Initializing audio...');
           
           // Configure Jitsi
           window.jitsiApi.executeCommand('setConfig', {
@@ -144,19 +143,13 @@ const JitsiPatientMeeting = ({
           try {
             window.jitsiApi.executeCommand('toggleAudio', true);
             
-            // Log audio state
-            console.log('Audio state:', {
-              isAudioMuted: window.jitsiApi.isAudioMuted(),
-              isAudioAvailable: window.jitsiApi.isAudioAvailable()
-            });
+           
 
             // Add listeners
             window.jitsiApi.addListener('audioMuteStatusChanged', (data) => {
-              console.log('Audio mute status:', data);
             });
             
             window.jitsiApi.addListener('audioAvailabilityChanged', (data) => {
-              console.log('Audio availability:', data);
             });
 
             // Check devices

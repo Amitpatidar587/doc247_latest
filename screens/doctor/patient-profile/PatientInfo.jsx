@@ -24,13 +24,10 @@ const formatDate = (iso) => {
 };
 
 const PatientInfo = ({ route }) => {
-  const [activeTab, setActiveTab] = useState(0);
-
   const { userId } = route.params;
   const dispatch = useDispatch();
   const { patient } = useSelector((state) => state.patient);
   const { records } = useSelector((state) => state.medical);
-  console.log(records);
 
   useEffect(() => {
     dispatch(fetchPatientDetails({ id: userId }));

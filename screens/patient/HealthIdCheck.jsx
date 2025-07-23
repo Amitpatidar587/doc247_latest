@@ -88,7 +88,6 @@ const HealthIdCheck = () => {
       },
     };
     dispatch(initiateCall(payload));
-    console.log("sending video call request");
     socket.emit("initiateVideoCall", {
       to_user_id: selectedDoctor?.id,
       to_user_type: "doctor",

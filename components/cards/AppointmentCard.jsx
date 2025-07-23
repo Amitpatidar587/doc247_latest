@@ -1,8 +1,14 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { useTheme } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { format, addDays, parseISO } from "date-fns";
-// import Icon from "react-native-vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import EvilIcons from "react-native-vector-icons/EvilIcons";
 
@@ -10,13 +16,13 @@ import { selectedAppointment } from "../../redux/slices/app_common/AppointmentSl
 import { useNavigation } from "@react-navigation/native";
 // import Reviews from "../Reviews";
 import { selectedChatUser } from "../../redux/slices/app_common/utility/chatSlice";
-import { navigate } from "../../navigationRef.js";
 const DEFAULT_IMAGE = require("../../assets/user.jpg");
 
 const AppointmentCard = ({
   appointment,
   // onDelete,
   onUpdateStatus,
+  loading,
 }) => {
   const { userRole } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -106,7 +112,6 @@ const AppointmentCard = ({
   };
 
   const gotoProfile = () => {
-    console.log("gotoProfile", userRole);
     navigation.navigate("ProfileDetails", {
       userId:
         userRole === "doctor"
@@ -114,20 +119,15 @@ const AppointmentCard = ({
           : appointment?.doctor_id,
     });
   };
+
+  console.log("appointment", appointment?.patient_image);
   return (
     <>
       <View style={styles.card}>
         <View style={styles.row}>
           {/* <Text>{imageSource.uri}</Text> */}
           <TouchableOpacity onPress={gotoProfile}>
-            <Image
-              source={imageSource || DEFAULT_IMAGE}
-              style={styles.image}
-              onError={() => {
-                // Fallback to default image if there's an error
-                imageSource.uri = DEFAULT_IMAGE;
-              }}
-            />
+            <Image source={imageSource} style={styles.image} />
           </TouchableOpacity>
 
           <View style={styles.info}>
@@ -192,16 +192,16 @@ const AppointmentCard = ({
                       borderRadius: 20,
                     },
                   ]}
-                  onPress={() => onUpdateStatus(appointment.id, "approved")}
+                  onPress={() => onUpdateStatus(appointment, "approved")}
                 >
-                  {/* <MaterialCommunityIcons
-                    name="check"
-                    color="green"
-                    size={20}
-                  />{" "} */}
-                  <Text style={{ color: colors.primary, fontWeight: "bold" }}>
-                    Accept
-                  </Text>
+                  {loading?.id === appointment?.id &&
+                  loading?.type === "approved" ? (
+                    <ActivityIndicator size="small" color={colors.primary} />
+                  ) : (
+                    <Text style={{ color: colors.primary, fontWeight: "bold" }}>
+                      Accept
+                    </Text>
+                  )}
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={[
@@ -213,11 +213,16 @@ const AppointmentCard = ({
                       borderRadius: 20,
                     },
                   ]}
-                  onPress={() => onUpdateStatus(appointment.id, "rejected")}
+                  onPress={() => onUpdateStatus(appointment, "rejected")}
                 >
-                  <Text style={{ color: "red", fontWeight: "bold" }}>
-                    Reject
-                  </Text>
+                  {loading?.id === appointment?.id &&
+                  loading?.type === "rejected" ? (
+                    <ActivityIndicator size="small" color="red" />
+                  ) : (
+                    <Text style={{ color: "red", fontWeight: "bold" }}>
+                      Reject
+                    </Text>
+                  )}
                 </TouchableOpacity>
               </>
             ) : (
@@ -232,11 +237,16 @@ const AppointmentCard = ({
                       borderRadius: 20,
                     },
                   ]}
-                  onPress={() => onUpdateStatus(appointment.id, "cancelled")}
+                  onPress={() => onUpdateStatus(appointment, "cancelled")}
                 >
-                  <Text style={{ color: "red", fontWeight: "bold" }}>
-                    Cancel
-                  </Text>
+                  {loading?.id === appointment?.id &&
+                  loading?.type === "cancelled" ? (
+                    <ActivityIndicator size="small" color="red" />
+                  ) : (
+                    <Text style={{ color: "red", fontWeight: "bold" }}>
+                      Cancel
+                    </Text>
+                  )}
                 </TouchableOpacity>
               </>
             )}

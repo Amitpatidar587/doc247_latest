@@ -13,7 +13,6 @@ const ForgotPasswordOverlay = ({ visible, onClose }) => {
 
   const handleResetPassword = () => {
     // Add your password reset logic here
-    console.log("Reset password for:", email);
     onClose(); // Close the overlay after handling
   };
 

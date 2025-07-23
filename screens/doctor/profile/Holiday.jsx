@@ -6,9 +6,8 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-  RefreshControl,
 } from "react-native";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomForm from "../../../components/forms/CustomForm";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -22,7 +21,6 @@ import {
 import { useTheme } from "react-native-paper";
 import { format } from "date-fns";
 import { useToast } from "../../../components/utility/Toast";
-import { FlatList } from "react-native-gesture-handler";
 
 const Holiday = () => {
   const { colors } = useTheme();
@@ -33,6 +31,7 @@ const Holiday = () => {
   );
   const { showToast } = useToast();
   const [ModalVisible, setModalVisible] = useState(false);
+  const [apiCall, setApiCall] = useState(false);
   const [dayOffFormData, setDayOffFormData] = useState({
     off_date: "",
     doctor_id: userId,
@@ -78,31 +77,23 @@ const Holiday = () => {
         doctor_id: userId,
         reason: "",
       });
+      setApiCall(true);
     } catch (error) {
-      alert("Failed to mark day off: " + error.message);
+      console.log(error);
     }
   };
 
-  const fetchDayOff = useCallback(async () => {
+  const fetchDayOff = async () => {
     try {
       await dispatch(getDayOff(userId));
     } catch (error) {
       alert("Failed to fetch day off: " + error.message);
     }
-  }, [dispatch, userId]);
+  };
 
   useEffect(() => {
-    if (dayOff?.length > 0) return;
     fetchDayOff();
-  }, [fetchDayOff]);
-
-  const [refreshing, setRefreshing] = useState(false);
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    fetchDayOff();
-    setRefreshing(false);
-  };
+  }, [apiCall]);
 
   const handleDeleteDayOff = async (id) => {
     try {
@@ -137,50 +128,42 @@ const Holiday = () => {
       {/* <Text style={styles.title}>Holiday Settings</Text> */}
 
       {/* Day Off Cards */}
+      <ScrollView contentContainerStyle={styles.cardList}>
+        {dayOff?.length > 0 ? (
+          dayOff.map((item) => (
+            <View key={item.id} style={styles.card}>
+              <View style={styles.cardContent}>
+                <Text style={styles.cardDate}>{formatDate(item.off_date)}</Text>
+                <Text style={styles.cardReason}>
+                  {item.reason || "No reason given"}
+                </Text>
+              </View>
+              {/* Delete Button */}
 
-      <FlatList
-        data={dayOff}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.cardList}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            colors={[colors.primary]}
-          />
-        }
-        renderItem={({ item }) => (
-          <View style={styles.card}>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardDate}>{formatDate(item?.off_date)}</Text>
-              <Text style={styles.cardReason}>
-                {item.reason || "No reason given"}
-              </Text>
+              <TouchableOpacity
+                style={[
+                  styles.deleteButton,
+                  {
+                    borderColor: "red",
+                    borderWidth: 1,
+                    minWidth: 60,
+                  },
+                ]}
+                onPress={() => handleDeleteDayOff(item.id)}
+              >
+                <Text style={{ color: "red", fontWeight: "700" }}>Delete</Text>
+                {/* <Icon name="delete" size={20} color="#fff" /> */}
+              </TouchableOpacity>
             </View>
-            {/* Delete Button */}
-
-            <TouchableOpacity
-              style={[
-                styles.deleteButton,
-                {
-                  borderColor: "red",
-                  borderWidth: 1,
-                  minWidth: 60,
-                },
-              ]}
-              onPress={() => handleDeleteDayOff(item.id)}
-            >
-              <Text style={{ color: "red", fontWeight: "700" }}>Delete</Text>
-              {/* <Icon name="delete" size={20} color="#fff" /> */}
-            </TouchableOpacity>
+          ))
+        ) : (
+          <View style={styles.noDayOffContainer}>
+            <Text style={[styles.emptyText, { color: colors.text }]}>
+              No Day Off
+            </Text>
           </View>
         )}
-        ListEmptyComponent={
-          <View style={styles.noDayOffContainer}>
-            <Text style={styles.noDayOffText}>No Day Off</Text>
-          </View>
-        }
-      />
+      </ScrollView>
       <View
         style={{
           paddingHorizontal: 15,
@@ -294,17 +277,11 @@ const styles = StyleSheet.create({
   noDayOffContainer: {
     flex: 1,
     justifyContent: "center",
-    // minHeight: "100%",
-    marginTop: "75%",
+    minHeight: " 100%",
     alignItems: "center",
   },
-  noDayOffText: {
-    fontSize: 18,
-    color: "gray",
-    fontWeight: "bold",
-    textAlign: "center",
-    // opacity: 0.6,
-  },
+  emptyText: { fontSize: 18, fontWeight: "bold", opacity: 0.6 },
+
   modalBackground: {
     flex: 1,
     justifyContent: "center",

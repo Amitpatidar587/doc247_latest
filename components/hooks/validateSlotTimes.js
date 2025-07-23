@@ -38,12 +38,9 @@ const convertToMinutes = (time, isEndTime = false) => {
   slotDuration,
   slotInterval,
 }) => {
-  console.log(slotStartTime, slotEndTime, slotDuration, slotInterval);
   if (!slotStartTime || !slotEndTime) {
     return "Start time and end time are required.";
   }
-
-  console.log(slotStartTime, slotEndTime);
   const startMins = convertToMinutes(slotStartTime);
   const endMins = convertToMinutes(slotEndTime, true);
 

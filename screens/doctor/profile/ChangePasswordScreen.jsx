@@ -78,7 +78,6 @@ export default function ChangePasswordScreen() {
   }, [message, success, dispatch]);
 
   const handleSubmit = () => {
-    console.log("Form Data:", formData);
     if (!validateForm()) return;
     dispatch(changePassword({ data: formData }));
   };

@@ -40,15 +40,16 @@ const JitsiMeetingScreen = ({ route }) => {
     const micGranted = await PermissionsAndroid.check(
       PermissionsAndroid.PERMISSIONS.RECORD_AUDIO
     );
-    console.log("Camera permission granted:", cameraGranted);
-    console.log("Microphone permission granted:", micGranted);
+   
   };
 
   useEffect(() => {
     checkPermissions();
     socket.emit("videoCallJoined", {
-      user_id: userId,
-      appointment_id: appointmentId,
+        user_id: userId,
+        appointment_id: appointmentId,
+        from_user_id: state?.from_user_id,
+        to_user_id: state?.to_user_id,
     });
   }, []);
 
@@ -140,11 +141,12 @@ const JitsiMeetingScreen = ({ route }) => {
 
       const targetScreen = userRole === "patient" ? "Home" : "Session";
       socket.emit("videoCallLeft", {
-        user_id: userId,
+          user_id: userId,
         appointment_id: appointmentId,
+        from_user_id: state?.from_user_id,
+        to_user_id: state?.to_user_id,
       });
 
-      console.log("createAppointmentData", createAppointmentData);
       if (userRole === "doctor" && createAppointmentData?.id) {
         dispatch(
           selectedAppointment({
@@ -344,11 +346,7 @@ const JitsiMeetingScreen = ({ route }) => {
       function initializeAudio() {
         if (window.jitsiApi) {
           // Log initial state
-          console.log('Platform:', '${Platform.OS}');
-          console.log('Initial audio state:', {
-            isAudioMuted: window.jitsiApi.isAudioMuted(),
-            isAudioAvailable: window.jitsiApi.isAudioAvailable()
-          });
+         
 
           // Android-specific configuration
           const isAndroid = '${Platform.OS}' === 'android';
@@ -426,7 +424,6 @@ const JitsiMeetingScreen = ({ route }) => {
               
               // Add audio state listeners
               window.jitsiApi.addListener('audioMuteStatusChanged', (data) => {
-                console.log('Audio mute status changed:', data);
                 if (isAndroid && data.muted) {
                   // Try to unmute if muted on Android
                   window.jitsiApi.executeCommand('toggleAudio', false);
@@ -434,7 +431,6 @@ const JitsiMeetingScreen = ({ route }) => {
               });
               
               window.jitsiApi.addListener('audioAvailabilityChanged', (data) => {
-                console.log('Audio availability changed:', data);
                 if (isAndroid && !data.available && retryCount < 3) {
                   // Retry audio initialization on Android
                   setTimeout(() => initAudioWithRetry(retryCount + 1), 1000);
@@ -444,7 +440,6 @@ const JitsiMeetingScreen = ({ route }) => {
               // Check available audio devices
               window.jitsiApi.executeCommand('getAvailableDevices', 'audioinput')
                 .then(devices => {
-                  console.log('Available audio input devices:', devices);
                   if (isAndroid && devices.length === 0 && retryCount < 3) {
                     // Retry if no devices found on Android
                     setTimeout(() => initAudioWithRetry(retryCount + 1), 1000);

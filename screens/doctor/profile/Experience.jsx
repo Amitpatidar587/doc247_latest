@@ -296,11 +296,14 @@ const ExperienceScreen = () => {
           </View>
         )}
       />
-      <CustomButton
-        title="+ Add Experience"
-        onPress={() => openForm()}
-        style={[styles.addButton, { backgroundColor: colors.primary }]}
-      />
+      <View style={styles.addButton}>
+        <CustomButton
+          title="+ Add Experience"
+          variant="primary-outline"
+          size="lg"
+          onPress={() => openForm()}
+        />
+      </View>
       <Modal visible={modalVisible} animationType="slide" transparent>
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
@@ -332,8 +335,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   heading: { fontSize: 18, fontWeight: "bold" },
-  addButton: {
-    backgroundColor: "#007bff",
+  addButton: {  
     marginHorizontal: 15,
     marginVertical: 5,
   },

@@ -156,6 +156,7 @@ const appointmentSlice = createSlice({
     availableSlots: [],
     pharmacies: [],
     fetchAppointmentsLoading: false,
+    createAppointmentLoading: false,
     updateAppointmentLoading: false,
     deleteAppointmentLoading: false,
     getAvailableSlotsLoading: false,

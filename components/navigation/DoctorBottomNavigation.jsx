@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "react-native-paper";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-// import { useAnimatedStyle, withSpring } from "react-native-reanimated";
+import { useAnimatedStyle, withSpring } from "react-native-reanimated";
 
 // Screens
 import ProfileScreen from "../../screens/doctor/profile/ProfileScreen";
@@ -21,36 +21,33 @@ import JitsiMeetingScreen from "../../screens/common/JitsiMeetingScreen";
 const Tab = createBottomTabNavigator();
 
 // Animated Tab Icon
-// const MaterialCommunityIcons = ({ name, color, size, focused }) => {
-//   const animatedStyle = useAnimatedStyle(() => ({
-//     transform: [{ scale: withSpring(focused ? 1.2 : 1) }],
-//   }));
+const AnimatedTabIcon = ({ name, color, size, focused }) => {
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: withSpring(focused ? 1.2 : 1) }],
+  }));
 
-//   return (
-//     <View
-//       style={[
-//         animatedStyle,
-//         {
-//           justifyContent: "center",
-//           alignItems: "center",
-//           width: 60,
-//           height: 60,
-//           borderRadius: 50,
-//         },
-//       ]}
-//     >
-//       <MaterialCommunityIcons name={name} color={color} size={size} />
-//     </View>
-//   );
-// };
+  return (
+    <View
+      style={[
+        animatedStyle,
+        {
+          justifyContent: "center",
+          alignItems: "center",
+          width: 60,
+          height: 60,
+          borderRadius: 50,
+        },
+      ]}
+    >
+      <MaterialCommunityIcons name={name} color={color} size={size} />
+    </View>
+  );
+};
 
 const DoctorBottomNavigation = () => {
   const { colors } = useTheme();
   // console.log(colors.primary);
   const { notificationsCount } = useSelector((state) => state.notification);
-
-  console.log(notificationsCount);
-
   return (
     <Tab.Navigator
       screenOptions={{
@@ -93,7 +90,7 @@ const DoctorBottomNavigation = () => {
         component={PatientAppointmentScreen}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
+            <AnimatedTabIcon
               name="view-dashboard-outline"
               color={color}
               size={size}
@@ -109,7 +106,7 @@ const DoctorBottomNavigation = () => {
         component={DoctorAvailability}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
+            <AnimatedTabIcon
               name="calendar-outline"
               color={color}
               size={size}
@@ -124,7 +121,7 @@ const DoctorBottomNavigation = () => {
         component={Holiday}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
+            <AnimatedTabIcon
               name="pool"
               color={color}
               size={size}
@@ -140,7 +137,7 @@ const DoctorBottomNavigation = () => {
         component={Reviews}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
+            <AnimatedTabIcon
               name="star-outline"
               color={color}
               size={size}
@@ -156,7 +153,7 @@ const DoctorBottomNavigation = () => {
         component={ChatListScreen}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
+            <AnimatedTabIcon
               name="chat-outline"
               color={color}
               size={size}
@@ -213,7 +210,7 @@ const DoctorBottomNavigation = () => {
         component={ProfileScreen}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
-            <MaterialCommunityIcons
+            <AnimatedTabIcon
               name="account-outline"
               color={color}
               size={size}

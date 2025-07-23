@@ -21,7 +21,6 @@ const NotificationListScreen = () => {
   const { notifications, loading, pagination, notificationsCount } =
     useSelector((s) => s.notification);
 
-  console.log(notificationsCount);
 
   const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
@@ -95,7 +94,6 @@ const NotificationListScreen = () => {
       );
     }
     if (item.notify_type === "appointment") {
-      console.log(item);
       const screen = userRole === "patient" ? "Appointments" : "Dashboard";
       navigate(screen, { status: item?.status || "pending" });
     } else if (item.notify_type === "review") {

@@ -20,7 +20,6 @@ const useVideoCallListener = () => {
     const handleNotification = (data) => {
       if (!data?.type) return;
 
-      console.log("Received socket notification:", data);
       const { type, data: payload, reason } = data;
 
       switch (type) {

@@ -33,7 +33,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
   const {
     availableSlots,
     getAvailableSlotsLoading,
-    loading,
+    createAppointmentLoading,
     success,
     error,
     message,
@@ -129,7 +129,6 @@ const BookAppointmentScreen = ({ route, navigation }) => {
     availableSlots?.flatMap((session) =>
       session.slots.map(
         (slot) => (
-          // console.log(slot),
           {
             label: format(new Date(`1970-01-01T${slot.start_time}`), "h:mm a"),
             value: slot.start_time,
@@ -212,8 +211,8 @@ const BookAppointmentScreen = ({ route, navigation }) => {
           title="Confirm Booking"
           onPress={handleBooking}
           style={{ marginBottom: 100 }}
-          loading={loading}
-          disabled={!selectedDate || !selectedTime || loading}
+          loading={createAppointmentLoading}
+          disabled={!selectedDate || !selectedTime || createAppointmentLoading}
           color="#0474ed"
         />
       )}

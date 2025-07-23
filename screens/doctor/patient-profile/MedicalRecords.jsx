@@ -29,15 +29,10 @@ const MedicalRecords = ({ records }) => {
   const [activeRecordId, setActiveRecordId] = useState(null);
 
   const openModal = (id) => {
-    console.log("open modal");
     setActiveRecordId(id);
     setModalVisible(true);
   };
   const closeModal = () => setModalVisible(false);
-
-  const deleteRecord = () => {
-    console.log("delete record");
-  };
 
   return (
     <>

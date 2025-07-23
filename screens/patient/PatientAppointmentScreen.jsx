@@ -30,7 +30,6 @@ const PatientAppointmentScreen = ({ route }) => {
   const { showToast } = useToast();
   const initializedRef = useRef(false);
   const { status: routeStatus } = route.params || {};
-  console.log("routeStatus", routeStatus);
   const { userId, userRole } = useSelector((state) => state.auth);
   const { loading, error, appointments, pagination, message, success } =
     useSelector((state) => state.appointment);
@@ -39,7 +38,10 @@ const PatientAppointmentScreen = ({ route }) => {
   const [page, setPage] = useState(1);
   const [resetting, setResetting] = useState(false);
   const status = statusTabs[statusIndex];
-
+ const [loadingIds, setLoadingIds] = useState({
+    id: null,
+    type: null,
+  });
   const fetchAppointment = useCallback(
     async (newPage) => {
       try {
@@ -105,8 +107,17 @@ const PatientAppointmentScreen = ({ route }) => {
     );
   };
 
-  const UpdateAppoinmentStatus = async (id, status) => {
-    await dispatch(updateAppointment({ appointmentId: id, status }));
+  const UpdateAppoinmentStatus = async (appointment, status) => {
+    setLoadingIds({ id: appointment?.id, type: status });
+    try {
+      await dispatch(
+        updateAppointment({ appointmentId: appointment.id, status: status })
+      );
+    } catch (error) {
+      console.error("Failed to update appointment status:", error);
+    } finally {
+      setLoadingIds({ id: null, type: null });
+    }
   };
 
   const onDelete = async (id) => {
@@ -196,6 +207,7 @@ const PatientAppointmentScreen = ({ route }) => {
                 onUpdateStatus={UpdateAppoinmentStatus}
                 appointment={item}
                 onCancel={() => onCancel(item.id)}
+                loading={loadingIds}
               />
             )}
             refreshControl={

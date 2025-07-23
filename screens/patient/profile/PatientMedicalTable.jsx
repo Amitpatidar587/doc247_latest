@@ -170,7 +170,6 @@ export default function PatientMedicalTable({ medicalRecord }) {
   //     </View>
   //   </View>
   // );
-  console.log("medicalRecords:", medicalRecord);
   return (
     <>
       {/* <FlatList

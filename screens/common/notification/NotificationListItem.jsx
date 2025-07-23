@@ -16,7 +16,6 @@ const NotificationListItem = ({ notification, onPress }) => {
     try {
       return formatDistanceToNow(date, { addSuffix: true });
     } catch (e) {
-      console.log("Date parsing error:", e);
       return "Just now";
     }
   };

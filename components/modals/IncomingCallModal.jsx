@@ -33,8 +33,6 @@ const IncomingCallModal = ({
   const timeoutRef = useRef(null);
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.appointment);
-
-  console.log(callStatus);
   useEffect(() => {
     if (
       callStatus === "rejected" ||
@@ -83,9 +81,7 @@ const IncomingCallModal = ({
 
   const handleAccept = async () => {
     clearTimeout(timeoutRef.current);
-    console.log("incomingCall", incomingCall);
     if (!incomingCall?.appointment_id) {
-      console.log("create appointment");
       let data = {
         doctor_id: incomingCall?.to_user_id,
         patient_id: incomingCall?.from_user_id,
@@ -100,7 +96,6 @@ const IncomingCallModal = ({
       onAccept();
       onClose();
       const res = await dispatch(createAppointment(data)).unwrap();
-      console.log("res", res);
       if (res?.success) {
         dispatch(resetAppointmentState());
       }
@@ -153,7 +148,6 @@ const IncomingCallModal = ({
       case "connecting":
         return (
           <>
-            {console.log("receiverData", receiverData)}
             <Text style={styles.subText}>{receiverData?.title}</Text>
             <Image
               source={

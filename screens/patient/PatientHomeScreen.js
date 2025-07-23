@@ -23,9 +23,6 @@ const PatientHomeScreen = () => {
 
   const { doctorsList, loading, error } = useSelector((state) => state.doctor);
 
-  console.log("theme", theme);
-
-  // console.log("doctorsList", doctorsList);
 
   // Filter doctors whenever usersData updates
 
@@ -54,7 +51,6 @@ const PatientHomeScreen = () => {
   }
 
   if (error) {
-    console.log("Something went wrong error", error);
     return (
       <View>
         <Text style={{ padding: 10 }}>

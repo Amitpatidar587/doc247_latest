@@ -39,7 +39,6 @@ export const updateDoctor = createAsyncThunk(
 export const fetchDoctorById = createAsyncThunk(
   "doctor/fetchDoctorById",
   async (doctorId, { rejectWithValue }) => {
-    console.log(doctorId);
     try {
       const response = await api.get(`/user/doctors/${doctorId}/`, {});
 

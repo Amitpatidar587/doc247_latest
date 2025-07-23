@@ -373,8 +373,6 @@ const ChatWindow = ({ navigation }) => {
       </View>
     );
   }
-
-  console.log(hasMore);
   return (
     <KeyboardAvoidingView
       style={[styles.container, { backgroundColor: colors.background }]}

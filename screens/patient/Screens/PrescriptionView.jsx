@@ -20,18 +20,11 @@ const PrescriptionView = ({ prescriptionGroupId, appointmentId }) => {
       appointment_id: appointmentId,
     };
     dispatch(fetchPrescription(params));
-    // console.log(prescriptionGroupId);
     // setHasFetched(true);
     // }
   }, [prescriptionGroupId, appointmentId]);
 
-  // console.log(
-  //   "prescription",
-  //   prescriptionGroupId,
-  //   "prescriptionGroupId",
-  //   prescription
-  // );
-  // console.log("prescription", appointmentId);
+
   return (
     <View style={styles.container}>
       <View style={styles.tableHeader}>
