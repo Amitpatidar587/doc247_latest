@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 import { formatDistanceToNow } from "date-fns";
+import { Text } from "react-native-paper";
 
 const getInitials = (name) => {
   if (!name) return "";

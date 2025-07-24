@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
-  Text,
-  TouchableOpacity,
   StyleSheet,
   ScrollView,
 } from "react-native";
 import PropTypes from "prop-types";
-import { Chip, useTheme } from "react-native-paper";
+import { Chip, useTheme,  Text,
+ } from "react-native-paper";
 
 const TagInput = ({
   placeholder = "Add a tag",

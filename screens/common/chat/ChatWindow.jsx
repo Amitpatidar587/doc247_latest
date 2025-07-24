@@ -7,7 +7,6 @@ import React, {
 } from "react";
 import {
   View,
-  Text,
   TextInput,
   TouchableOpacity,
   FlatList,
@@ -22,7 +21,7 @@ import {
   createChat,
   fetchChatHistory,
 } from "../../../redux/slices/app_common/utility/chatSlice";
-import { ActivityIndicator, useTheme } from "react-native-paper";
+import { ActivityIndicator, Text, useTheme } from "react-native-paper";
 import { socket } from "../../../components/socket/socket";
 
 const ChatWindow = ({ navigation }) => {

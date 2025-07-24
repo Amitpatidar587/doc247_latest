@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Modal, View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {  View, StyleSheet, TouchableOpacity } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+import { Modal, Text } from "react-native-paper";
 
 const LocationPickerModal = ({ visible, onClose, onLocationSelect }) => {
   const [selectedLocation, setSelectedLocation] = useState(null);

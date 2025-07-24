@@ -1,12 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ActivityIndicator,
-  StyleSheet,
-  Image,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import PropTypes from "prop-types";
 import { socket } from "../socket/socket";
 import { navigate } from "../../navigationRef";
@@ -18,6 +11,7 @@ import {
   resetAppointmentState,
   resetCreateAppointment,
 } from "../../redux/slices/app_common/AppointmentSlice.js";
+import { ActivityIndicator, Text } from "react-native-paper";
 
 const IncomingCallModal = ({
   incomingCall,

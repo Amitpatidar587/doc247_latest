@@ -1,10 +1,11 @@
 // components/PrescriptionView.js
 
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
 // import { Button, List } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPrescription } from "../../../redux/slices/app_common/utility/orderSlice";
+import { Text } from "react-native-paper";
 
 const PrescriptionView = ({ prescriptionGroupId, appointmentId }) => {
   const dispatch = useDispatch();

@@ -7,7 +7,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import { Button, Text, Switch } from "react-native-paper";
+import {  Text, Switch } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 import CustomTextInput from "./CustomTextInput";

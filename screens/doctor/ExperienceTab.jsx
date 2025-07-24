@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   TextInput,
   StyleSheet,
   TouchableOpacity,
@@ -12,6 +11,7 @@ import {
 } from "react-native";
 import DatePicker from "react-native-datepicker"; 
 import Modal from 'react-native-modal';// You'll need to install this: npm install react-native-datepicker
+import { Text } from "react-native-paper";
 
 const ExperienceTab = ({ onSubmit, onCancel }) => {
     

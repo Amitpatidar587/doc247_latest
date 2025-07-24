@@ -1,5 +1,5 @@
 // Add this to the top of your App.js file or in a separate initialization file
-import { LogBox } from "react-native";
+import { LogBox, SafeAreaView, StatusBar } from "react-native";
 // Ignore the specific warning
 LogBox.ignoreLogs([
   "Possible Unhandled Promise Rejection",
@@ -20,7 +20,6 @@ import DoctorBottomNavigation from "./components/navigation/DoctorBottomNavigati
 import PatientBottomNavigation from "./components/navigation/PatientBottomNavigation";
 import { lightTheme, darkTheme } from "./theme";
 import { PersistGate } from "redux-persist/integration/react";
-import { SafeAreaView, StatusBar } from "react-native";
 import AlertProvider from "./components/utility/AlertProvider";
 // import PatientDashboard from "./screens/patient/Home/PatientDashboard";
 
@@ -248,7 +247,7 @@ export default function App() {
       <AlertProvider>
         <PersistGate loading={null} persistor={persistor}>
           <GestureHandlerRootView style={{ flex: 1 }}>
-            <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
+            <PaperProvider theme={isDarkMode ? lightTheme : lightTheme}>
               <ToastProvider>
                 <MainNavigator />
               </ToastProvider>

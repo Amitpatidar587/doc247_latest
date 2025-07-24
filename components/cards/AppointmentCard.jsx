@@ -1,12 +1,11 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme, Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { format, addDays, parseISO } from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";

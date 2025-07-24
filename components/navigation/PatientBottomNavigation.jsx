@@ -5,7 +5,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import DoctorSearch from "../../screens/patient/Home/DoctorSearch";
 import PatientAppointmentScreen from "../../screens/patient/PatientAppointmentScreen";
 import PatientProfileScreen from "../../screens/patient/PatientProfile";
-import { useTheme } from "react-native-paper";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import PatientHome from "../../screens/patient/Home/Home";
 import Reviews from "../Reviews";
@@ -20,7 +19,9 @@ import DoctorProfile from "../../screens/doctor/profile2/DoctorProfile";
 // import Favorite from "../../screens/patient/Screens/Favorite";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import NotificationListScreen from "../../screens/common/notification/NotifcationList.jsx";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useTheme, Text } from "react-native-paper";
+
 import { useSelector } from "react-redux";
 import JitsiMeetingScreen from "../../screens/common/JitsiMeetingScreen.jsx";
 

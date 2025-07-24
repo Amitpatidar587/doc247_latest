@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import {
   View,
   TouchableOpacity,
-  Text,
   StyleSheet,
-  FlatList,
 } from "react-native";
 import PropTypes from "prop-types";
 import CustomTextInput from "./CustomTextInput";
+import { Text } from "react-native-paper";
 
 const SearchableInput = ({
   value,

@@ -1,5 +1,5 @@
-import React, { forwardRef, useImperativeHandle } from "react";
-import { Alert, Platform } from "react-native";
+import{ forwardRef, useImperativeHandle } from "react";
+import { Alert } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 const ImagePickerComponent = forwardRef(({ onImageSelected }, ref) => {

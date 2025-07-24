@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { Button, ActivityIndicator } from "react-native-paper";
+import { StyleSheet, View,  } from "react-native";
+import { Button, ActivityIndicator,Text } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 const CustomButton = ({

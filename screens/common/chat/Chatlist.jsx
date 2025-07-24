@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { FlatList, Text, View, RefreshControl } from "react-native";
+import {  FlatList, RefreshControl, View } from "react-native";
 import ChatListItem from "./ChatListItem";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import {

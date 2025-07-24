@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState, useRef } from "react";
 import {
   View,
-  Text,
+
   TouchableOpacity,
-  Modal,
+  
   StyleSheet,
   Animated,
 } from "react-native";
+import { Modal, Text } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Alert Types with Icons and Colors

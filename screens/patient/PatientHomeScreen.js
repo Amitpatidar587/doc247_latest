@@ -1,14 +1,11 @@
-import React, { use, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { View, FlatList, StyleSheet, Text } from "react-native";
 import DoctorCard from "../../components/cards/DoctorCard";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { getUserById, getUsers } from "../../api";
 import { useSelector } from "react-redux";
 import { ActivityIndicator } from "react-native-paper";
 import { TextInput } from "react-native-gesture-handler";
-import CustomTextInput from "../../components/forms/CustomTextInput";
-import DoctorProfile from "../DoctorProfile";
 import { fetchDoctors } from "../../redux/slices/doctor/doctorSlice";
 
 const PatientHomeScreen = () => {

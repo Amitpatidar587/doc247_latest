@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import {
   View,
-  Text,
-  TextInput,
+TextInput,
   StyleSheet,
   TouchableOpacity,
-  Alert,
-  ActivityIndicator,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -15,6 +12,7 @@ import {
   resetPassword,
 } from "../../redux/slices/app_common/auth/authSlice";
 import { useToast } from "../../components/utility/Toast";
+import { ActivityIndicator, Text } from "react-native-paper";
 
 export default function ResetPasswordScreen() {
   const dispatch = useDispatch();

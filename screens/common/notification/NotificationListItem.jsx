@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { formatDistanceToNow } from "date-fns";
+import { Text } from "react-native-paper";
 
 const NotificationListItem = ({ notification, onPress }) => {
   const createdAt = notification?.created_at;

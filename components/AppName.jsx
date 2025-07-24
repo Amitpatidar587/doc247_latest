@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
+import {  StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native-paper";
 
 const AppName = () => {
   return <Text style={styles.appName}>DOC247</Text>;

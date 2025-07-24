@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   View,
-  Text,
   Image,
-  TouchableOpacity,
   ScrollView,
   StyleSheet,
 } from "react-native";
@@ -11,12 +9,11 @@ import Icon from "react-native-vector-icons/SimpleLineIcons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPatientDetails } from "../../../redux/slices/patient/patientSlice.js";
 import MedicalRecords from "./MedicalRecords.jsx"; // used for Appointment tab
-import PrescriptionTable from "./PrescriptionTabel.jsx";
 import {
-  fetchMedicalRecord,
   fetchMedicalRecords,
 } from "../../../redux/slices/patient/profile/medicalRecordSlice.js";
 import { getAge } from "../../../components/hooks/dateHook.js";
+import { Text } from "react-native-paper";
 
 const formatDate = (iso) => {
   const [year, month, day] = iso.split("-");

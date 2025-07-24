@@ -7,7 +7,7 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import { TextInput, Button, Text, Surface, useTheme } from "react-native-paper";
+import { TextInput, Button, Text, Surface } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 const screenWidth = Dimensions.get("window").width;

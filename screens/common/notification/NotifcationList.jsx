@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   FlatList,
-  Text,
   View,
   ActivityIndicator,
   RefreshControl,
@@ -14,6 +13,7 @@ import {
   updateNotification,
 } from "../../../redux/slices/app_common/utility/notificationSlice.js";
 import { navigate } from "../../../navigationRef.js";
+import { Text } from "react-native-paper";
 
 const NotificationListScreen = () => {
   const dispatch = useDispatch();

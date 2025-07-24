@@ -1,10 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   TouchableOpacity,
-  Modal,
   FlatList,
   Alert,
 } from "react-native";
@@ -18,7 +16,7 @@ import {
 } from "../../../redux/slices/patient/profile/vitalsSlice";
 import { format } from "date-fns";
 import CustomTextInput from "../../../components/forms/CustomTextInput";
-import { ActivityIndicator, useTheme } from "react-native-paper";
+import { ActivityIndicator, Modal, Text, useTheme } from "react-native-paper";
 import CustomButton from "../../../components/forms/CustomButton";
 import { useToast } from "../../../components/utility/Toast";
 

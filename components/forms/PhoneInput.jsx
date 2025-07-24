@@ -5,9 +5,8 @@ import {
   ScrollView,
   Modal,
   TouchableOpacity,
-  Text,
 } from "react-native";
-import { TextInput, Surface } from "react-native-paper";
+import { TextInput, Surface, Text } from "react-native-paper";
 import { useSelector } from "react-redux";
 import { countries } from "../../countrycode.json";
 

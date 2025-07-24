@@ -1,9 +1,10 @@
 import React, { useCallback } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchFavorites } from "../../../redux/slices/patient/favoriteSlice";
 import { DoctorCard } from "../Home/DoctorCard";
 import { useFocusEffect } from "@react-navigation/native";
+import { Text } from "react-native-paper";
 
 const Favorite = () => {
   const { favorites } = useSelector((state) => state.favorite);

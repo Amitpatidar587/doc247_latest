@@ -332,7 +332,7 @@ const PatientBasicDetails = () => {
               marginTop: 10,
             }}
           >
-            Logout
+            Logout  
           </Text>
         </TouchableOpacity>
       </ScrollView>

@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import {
   View,
-  Text,
-  ActivityIndicator,
+
   StyleSheet,
   BackHandler,
   Alert,
@@ -11,6 +10,7 @@ import JitsiMeet, {JitsiMeetView} from 'react-native-jitsi-meet';
 import {useNavigation} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {useState} from 'react';
+import { ActivityIndicator, Text } from 'react-native-paper';
 
 const JitsiDoctorMeeting = ({route}) => {
   const navigation = useNavigation();

@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 
 import Icon from "react-native-vector-icons/SimpleLineIcons";
 import { getAge } from "../../../components/hooks/dateHook.js";
+import { Text } from "react-native-paper";
 
 const PatientCard = ({ patient }) => {
   return (

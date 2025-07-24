@@ -2,14 +2,13 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import {
   View,
   ScrollView,
-  Text,
   StyleSheet,
   TouchableOpacity,
   Animated,
   SafeAreaView,
   StatusBar,
 } from "react-native";
-import { useTheme } from "react-native-paper";
+import { Text,useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import DoctorSearchInput from "../../common/DoctorSearchInput";
@@ -473,6 +472,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     // marginTop: 4,
     fontSize: 12,
+    color:"#333"
   },
   featuredServices: {
     backgroundColor: "#f0f0ff",

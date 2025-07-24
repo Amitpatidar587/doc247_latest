@@ -1,6 +1,7 @@
 /* eslint-disable quotes */
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, Text, Animated } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
+import { Text } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const toastColors = {

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   ScrollView,
@@ -13,6 +12,7 @@ import ExperienceTab from "./ExperienceTab";
 import EducationTab from "./EducationTab";
 import ClinicsTab from "./ClinicsTab";
 import BusinessHoursTab from "./BusinessHoursTab";
+import { Text } from "react-native-paper";
 
 const ProfileTab = () => {
   const [activeTab, setActiveTab] = useState("Basic Details");

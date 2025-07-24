@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ToastAndroid } from "react-native";
-import { Button, TextInput } from "react-native-paper";
-import { useNavigation } from "@react-navigation/native";
+import { View, StyleSheet } from "react-native";
+import { Button,Text } from "react-native-paper";
 import CustomTextInput from "../../components/forms/CustomTextInput";
 import CustomButton from "../../components/forms/CustomButton";
 import { useDispatch, useSelector } from "react-redux";

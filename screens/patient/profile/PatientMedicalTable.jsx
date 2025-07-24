@@ -1,27 +1,21 @@
 import React, { useCallback, useState, useEffect } from "react";
 import {
   View,
-  Text,
-  FlatList,
   Image,
   StyleSheet,
   TouchableOpacity,
-  Modal,
-  ScrollView,
-  ActivityIndicator,
+ 
 } from "react-native";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPrescription } from "../../../redux/slices/app_common/utility/orderSlice";
-import DefaultAvatar from "../../../assets/doctor.jpg";
+
 import { format } from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import PrescriptionView from "../Screens/PrescriptionView";
-import { Avatar, useTheme } from "react-native-paper";
+import { Avatar, Text, useTheme } from "react-native-paper";
 
 export default function PatientMedicalTable({ medicalRecord }) {
-  const dispatch = useDispatch();
-  const { prescription, loading, error } = useSelector((state) => state.order);
+  
 
   const { colors } = useTheme();
 

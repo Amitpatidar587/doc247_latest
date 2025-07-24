@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import CustomTextInput from "../../components/forms/CustomTextInput";
 import CustomButton from "../../components/forms/CustomButton";
-import { useTheme } from "react-native-paper";
+import { useTheme, Text } from "react-native-paper";
 import {
   logIn,
   resetAuthState,

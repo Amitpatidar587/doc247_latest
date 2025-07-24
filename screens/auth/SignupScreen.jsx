@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
 import {
   View,
-  Text,
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Alert,
-  Modal,
-  Pressable,
+
 } from "react-native";
-import { useTheme } from "react-native-paper";
+import { useTheme, Text, Modal } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetAuthState,
@@ -277,15 +274,7 @@ const SignupScreen = ({ navigation, route }) => {
             <ScrollView>
               <TermsAndConditions />
             </ScrollView>
-
-            <Pressable
-              style={[styles.closeButton, { borderColor: colors.primary }]}
-              onPress={() => setTermsVisible(false)}
-            >
-              <Text style={[styles.closeButtonText, { color: colors.text }]}>
-                Close
-              </Text>
-            </Pressable>
+            \{" "}
           </View>
         </View>
       </Modal>
