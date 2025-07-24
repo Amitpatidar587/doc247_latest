@@ -43,7 +43,11 @@ const SignupScreen = ({ navigation, route }) => {
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [termsVisible, setTermsVisible] = useState(false); // Modal visibility
 
-  const { success, message, loading } = useSelector((state) => state.auth);
+  const { success, message, loading, email } = useSelector(
+    (state) => state.auth
+  );
+
+  console.log(success, message, loading);
 
   const { colors } = useTheme();
 
@@ -68,11 +72,12 @@ const SignupScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
-    console.log(success, message);
-    if (message === null) return;
+    if (message == null) return;
     showToast(message, success ? "success" : "error");
-    if (success) setShowOtpInput(true);
-    // dispatch(resetAuthState());
+    if (success) {
+      setShowOtpInput(true);
+    }
+    dispatch(resetAuthState());
   }, [success, message, dispatch]);
 
   const handleSignup = async () => {
@@ -82,10 +87,10 @@ const SignupScreen = ({ navigation, route }) => {
       ...formData,
       user_type: role,
     };
-    try {
-      await dispatch(signUp(payload));
-    } catch (err) {
-      Alert.alert("Error", "Something went wrong. Try again.");
+
+    const res = await dispatch(signUp(payload)).unwrap();
+    if (res?.success) {
+      setShowOtpInput(true);
     }
   };
 
@@ -364,7 +369,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 15,
+    // marginBottom: 15,
     textAlign: "center",
   },
   modalContent: {

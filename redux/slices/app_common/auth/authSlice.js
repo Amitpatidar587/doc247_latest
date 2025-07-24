@@ -157,9 +157,9 @@ const authSlice = createSlice({
       .addCase(signUp.pending, (state) => {
         state.loading = true;
         state.error = null;
+        state.success = false;
       })
       .addCase(signUp.fulfilled, (state, action) => {
-
         console.log(action.payload);
         state.loading = false;
         state.message = action.payload?.message;
@@ -168,6 +168,7 @@ const authSlice = createSlice({
       .addCase(signUp.rejected, (state, action) => {
         state.message = "something went wrong";
         state.loading = false;
+        // state.success = true
       })
 
       // Verify OTP
