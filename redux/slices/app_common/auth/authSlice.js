@@ -150,6 +150,7 @@ const authSlice = createSlice({
       .addCase(logIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+        state.message = "something went wrong";
       })
 
       // Signup
@@ -159,11 +160,11 @@ const authSlice = createSlice({
       })
       .addCase(signUp.fulfilled, (state, action) => {
         state.loading = false;
-        state.success = action.payload.success;
-        state.message = action.payload.message;
+        state.success = true;
+        state.message = "Account created successfully";
       })
       .addCase(signUp.rejected, (state, action) => {
-        state.error = action.payload;
+        state.message = "something went wrong";
         state.loading = false;
       })
 
@@ -181,6 +182,7 @@ const authSlice = createSlice({
       .addCase(verifyOtp.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
+        state.message = "something went wrong";
       })
 
       // Forget Password
@@ -196,6 +198,7 @@ const authSlice = createSlice({
       .addCase(forgotPassword.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
+        state.message = "something went wrong";
       })
 
       // Reset Password
@@ -211,6 +214,7 @@ const authSlice = createSlice({
       .addCase(resetPassword.rejected, (state, action) => {
         state.error = action.payload;
         state.loading = false;
+        state.message = "something went wrong";
       })
 
       // Change Password

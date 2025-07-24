@@ -25,15 +25,13 @@ const BookAppointmentScreen = ({ route, navigation }) => {
   const [enteredHealthId, setEnteredHealthId] = useState("");
   const { selectedDoctor } = useSelector((state) => state.doctor);
   const { userId, healthId } = useSelector((state) => state.auth);
-
-  const { colors } = useTheme();
   const { showToast } = useToast();
   const isHealthIdValid =
     healthId || (enteredHealthId && enteredHealthId.length >= 8);
   const {
     availableSlots,
     getAvailableSlotsLoading,
-    createAppointmentLoading,
+    loading,
     success,
     error,
     message,
@@ -45,7 +43,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
   useEffect(() => {
     const options = generateDateOptions();
     setDateOptions(options);
-    setSelectedDate(options[0]?.value); // Set Today as default
+    setSelectedDate(options[0]?.value);
   }, []);
 
   useEffect(() => {
@@ -211,8 +209,8 @@ const BookAppointmentScreen = ({ route, navigation }) => {
           title="Confirm Booking"
           onPress={handleBooking}
           style={{ marginBottom: 100 }}
-          loading={createAppointmentLoading}
-          disabled={!selectedDate || !selectedTime || createAppointmentLoading}
+          loading={loading}
+          disabled={!selectedDate || !selectedTime || loading}
           color="#0474ed"
         />
       )}

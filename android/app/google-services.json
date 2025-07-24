@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "559243532316",
+    "project_id": "nspa-e398c",
+    "storage_bucket": "nspa-e398c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559243532316:android:5bd7b7203408e458c127d9",
+        "android_client_info": {
+          "package_name": "com.nsp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqZWzZEiRmZHS8hThUbfejKHdsU2vIBaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
