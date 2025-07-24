@@ -212,13 +212,28 @@ const Award = () => {
             </View>
           </Card>
         )}
-        ListEmptyComponent={() => (
-          <View style={styles.emptyContainer}>
-            <Text style={[styles.emptyText, { color: colors.text }]}>
-              No Awards Found
-            </Text>
-          </View>
-        )}
+        ListEmptyComponent={() =>
+          loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "100%",
+                paddingBottom: 60,
+                marginTop: "45%",
+              }}
+            >
+              <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+          ) : (
+            <View style={styles.emptyContainer}>
+              <Text style={[styles.emptyText, { color: colors.text }]}>
+                No Awards Found
+              </Text>
+            </View>
+          )
+        }
       />
       <View style={{ padding: 5, paddingHorizontal: 15 }}>
         <CustomButton title="+ Add Award" onPress={() => openModal()} />

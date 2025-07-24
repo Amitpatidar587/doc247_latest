@@ -38,7 +38,7 @@ const PatientAppointmentScreen = ({ route }) => {
   const [page, setPage] = useState(1);
   const [resetting, setResetting] = useState(false);
   const status = statusTabs[statusIndex];
- const [loadingIds, setLoadingIds] = useState({
+  const [loadingIds, setLoadingIds] = useState({
     id: null,
     type: null,
   });
@@ -81,10 +81,12 @@ const PatientAppointmentScreen = ({ route }) => {
   }, [routeStatus]);
 
   useEffect(() => {
-    setResetting(true); // Prevent fetch until reset done
-    dispatch(resetAppointmentsList());
-    setPage(1);
-  }, [statusIndex, dispatch]);
+  dispatch(resetAppointmentsList());
+  setPage(1);
+  // fetchAppointments for first page right away
+  fetchAppointment(1);
+}, [statusIndex]);
+
 
   useEffect(() => {
     if (resetting) {
@@ -230,20 +232,29 @@ const PatientAppointmentScreen = ({ route }) => {
                 </View>
               ) : null
             }
-            ListEmptyComponent={() => (
-              <View
-                style={{
-                  flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  minHeight: "100%",
-                  paddingBottom: 60,
-                  marginTop: "45%",
-                }}
-              >
-                <Text style={styles.noAppointments}>No Appointments Found</Text>
-              </View>
-            )}
+            ListEmptyComponent={() =>
+              loading ? (
+                <View style={{flex: 1,  justifyContent: "center", alignItems: "center", minHeight: "100%", paddingBottom: 60, marginTop: "45%"  }}>
+                
+                  <ActivityIndicator size="large" color={colors.primary} />
+                </View>
+              ) : (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "100%",
+                    paddingBottom: 60,
+                    marginTop: "45%",
+                  }}
+                >
+                  <Text style={styles.noAppointments}>
+                    No Appointments Found
+                  </Text>
+                </View>
+              )
+            }
           />
         )}
       </List.Section>

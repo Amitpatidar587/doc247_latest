@@ -8,9 +8,8 @@ import {
   Alert,
   Modal,
   Pressable,
-  ToastAndroid,
 } from "react-native";
-import { Checkbox, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetAuthState,
@@ -69,11 +68,12 @@ const SignupScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+    console.log(success, message);
     if (message === null) return;
     showToast(message, success ? "success" : "error");
-    dispatch(resetAuthState());
     if (success) setShowOtpInput(true);
-  }, [success, message]);
+    // dispatch(resetAuthState());
+  }, [success, message, dispatch]);
 
   const handleSignup = async () => {
     // console.log(validateForm())
@@ -187,23 +187,23 @@ const SignupScreen = ({ navigation, route }) => {
         <>
           <View style={styles.checkboxContainer}>
             <TouchableOpacity
-  onPress={() => handleChange('is_agreed', !formData.is_agreed)}
-  style={{
-    width: 24,
-    height: 24,
-    borderWidth: 1,
-    borderColor: '#aaa',
-    borderRadius: 4,
-    backgroundColor: formData.is_agreed ? '#4CAF50' : '#f5f5f5',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 10,
-  }}
->
-  {formData.is_agreed && (
-    <Text style={{ color: 'white', fontWeight: 'bold' }}>✓</Text>
-  )}
-</TouchableOpacity>
+              onPress={() => handleChange("is_agreed", !formData.is_agreed)}
+              style={{
+                width: 24,
+                height: 24,
+                borderWidth: 1,
+                borderColor: "#aaa",
+                borderRadius: 4,
+                backgroundColor: formData.is_agreed ? "#4CAF50" : "#f5f5f5",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+              }}
+            >
+              {formData.is_agreed && (
+                <Text style={{ color: "white", fontWeight: "bold" }}>✓</Text>
+              )}
+            </TouchableOpacity>
             {/* <Checkbox
               status={formData.is_agreed ? "checked" : "unchecked"}
               onPress={() => handleChange("is_agreed", !formData.is_agreed)}

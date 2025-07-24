@@ -288,13 +288,28 @@ const EducationScreen = () => {
             </View>
           </Card>
         )}
-        ListEmptyComponent={() => (
-          <View style={styles.emptyContainer}>
-            <Text style={[styles.emptyText, { color: colors.text }]}>
-              No Education Found
-            </Text>
-          </View>
-        )}
+        ListEmptyComponent={() =>
+          loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "100%",
+                paddingBottom: 60,
+                marginTop: "45%",
+              }}
+            >
+              <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+          ) : (
+            <View style={styles.emptyContainer}>
+              <Text style={[styles.emptyText, { color: colors.text }]}>
+                No Education Found
+              </Text>
+            </View>
+          )
+        }
       />
       <CustomButton
         title="+ Add Education"

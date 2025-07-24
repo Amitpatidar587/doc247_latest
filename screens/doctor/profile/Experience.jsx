@@ -288,13 +288,28 @@ const ExperienceScreen = () => {
             </View>
           </Card>
         )}
-        ListEmptyComponent={() => (
-          <View style={styles.emptyContainer}>
-            <Text style={[styles.emptyText, { color: colors.text }]}>
-              No Experience Found
-            </Text>
-          </View>
-        )}
+        ListEmptyComponent={() =>
+          loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "100%",
+                paddingBottom: 60,
+                marginTop: "45%",
+              }}
+            >
+              <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+          ) : (
+            <View style={styles.emptyContainer}>
+              <Text style={[styles.emptyText, { color: colors.text }]}>
+                No Experience Found
+              </Text>
+            </View>
+          )
+        }
       />
       <View style={styles.addButton}>
         <CustomButton
@@ -335,7 +350,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   heading: { fontSize: 18, fontWeight: "bold" },
-  addButton: {  
+  addButton: {
     marginHorizontal: 15,
     marginVertical: 5,
   },

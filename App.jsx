@@ -10,38 +10,38 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Provider as PaperProvider } from "react-native-paper";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider, useDispatch, useSelector } from "react-redux";
-import { store, persistor } from "./redux/store.js";
-import SplashScreen from "./screens/SplashScreen.js";
-import RoleSelection from "./screens/RoleSelection.js";
-import LoginScreen from "./screens/auth/LoginScreen.jsx";
-import SignupScreen from "./screens/auth/SignupScreen.jsx";
-import ForgotPasswordScreen from "./screens/auth/ForgotPasswordScreen.jsx";
-import DoctorBottomNavigation from "./components/navigation/DoctorBottomNavigation.jsx";
-import PatientBottomNavigation from "./components/navigation/PatientBottomNavigation.jsx";
+import { store, persistor } from "./redux/store";
+import SplashScreen from "./screens/SplashScreen";
+import RoleSelection from "./screens/RoleSelection";
+import LoginScreen from "./screens/auth/LoginScreen";
+import SignupScreen from "./screens/auth/SignupScreen";
+import ForgotPasswordScreen from "./screens/auth/ForgotPasswordScreen";
+import DoctorBottomNavigation from "./components/navigation/DoctorBottomNavigation";
+import PatientBottomNavigation from "./components/navigation/PatientBottomNavigation";
 import { lightTheme, darkTheme } from "./theme";
 import { PersistGate } from "redux-persist/integration/react";
 import { SafeAreaView, StatusBar } from "react-native";
-import AlertProvider from "./components/utility/AlertProvider.jsx";
+import AlertProvider from "./components/utility/AlertProvider";
 // import PatientDashboard from "./screens/patient/Home/PatientDashboard";
 
 const Stack = createStackNavigator();
 const RootStack = createStackNavigator();
-import ResetPasswordScreen from "./screens/auth/ResetPasswordScreen.jsx";
-import VideosCall from "./screens/common/VideosCall.jsx";
-import useSocketJoin from "./components/socket/useSocketJoin.js";
-import useVideoCallListener from "./components/socket/useVideoCallListener.js";
-import { ToastProvider } from "./components/utility/Toast.js";
-import IncomingCallModal from "./components/modals/IncomingCallModal.jsx";
+import ResetPasswordScreen from "./screens/auth/ResetPasswordScreen";
+import VideosCall from "./screens/common/VideosCall";
+import useSocketJoin from "./components/socket/useSocketJoin";
+import useVideoCallListener from "./components/socket/useVideoCallListener";
+import { ToastProvider } from "./components/utility/Toast";
+import IncomingCallModal from "./components/modals/IncomingCallModal";
 import {
   acceptCall,
   hideCallModal,
   rejectCall,
-} from "./redux/slices/app_common/utility/videoCallSlice.js";
-import { socket } from "./components/socket/socket.js";
+} from "./redux/slices/app_common/utility/videoCallSlice";
+import { socket } from "./components/socket/socket";
 import { navigate, navigationRef } from "./navigationRef";
-// import { useFirebaseNotification } from "./components/hooks/useFirebaseNotification.js";
+import { useFirebaseNotification } from "./components/hooks/useFirebaseNotification";
 import { useCallback, useEffect } from "react";
-// import messaging from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 import { receiveCall } from "./redux/slices/app_common/utility/videoCallSlice.js";
 import {
   fetchUnreadNotifications,
@@ -66,80 +66,80 @@ function MainNavigator() {
   const dispatch = useDispatch();
   useSocketJoin();
   useVideoCallListener();
-  // const token = useFirebaseNotification();
-  // useEffect(() => {
-  //   if (token) {
-  //     dispatch(
-  //       SendNotification({
-  //         token: token,
-  //         user_id: userId,
-  //         user_type: userRole,
-  //       })
-  //     );
-  //   }
-  // }, [dispatch, token, userId, userRole]);
+  const token = useFirebaseNotification();
+  useEffect(() => {
+    if (token) {
+      dispatch(
+        SendNotification({
+          token: token,
+          user_id: userId,
+          user_type: userRole,
+        })
+      );
+    }
+  }, [dispatch, token, userId, userRole]);
 
-  // const getNotificationCount = useCallback(() => {
-  //   dispatch(
-  //     fetchUnreadNotifications({
-  //       action: "getUnreadCount",
-  //       user_id: userId,
-  //       user_type: userRole,
-  //     })
-  //   );
-  // }, [userId, dispatch]);
+  const getNotificationCount = useCallback(() => {
+    dispatch(
+      fetchUnreadNotifications({
+        action: "getUnreadCount",
+        user_id: userId,
+        user_type: userRole,
+      })
+    );
+  }, [userId, dispatch]);
 
-  // useEffect(() => {
-  //   getNotificationCount();
-  // }, [getNotificationCount]);
+  useEffect(() => {
+    getNotificationCount();
+  }, [getNotificationCount]);
 
-  // useEffect(() => {
-  //   const unsubscribe = messaging().onMessage(async (remoteMessage) => {
-  //     if (remoteMessage) {
-  //       getNotificationCount();
-  //     }
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+      if (remoteMessage) {
+        getNotificationCount();
+      }
 
-  //     console.log("📥 Message received:", remoteMessage);
+      console.log("📥 Message received:", remoteMessage);
 
-  //     if (!remoteMessage?.data || remoteMessage?.data?.type !== "video_call") {
-  //       console.warn("Received message without type:", remoteMessage);
-  //       return;
-  //     }
+      if (!remoteMessage?.data || remoteMessage?.data?.type !== "video_call") {
+        console.warn("Received message without type:", remoteMessage);
+        return;
+      }
 
-  //     if (remoteMessage?.data?.type === "video_call") {
-  //       if (parseInt(remoteMessage?.data?.to_user_id) === userId) {
-  //         useSocketJoin();
-  //         dispatch(receiveCall(remoteMessage?.data));
-  //       }
-  //     }
-  //   });
+      if (remoteMessage?.data?.type === "video_call") {
+        if (parseInt(remoteMessage?.data?.to_user_id) === userId) {
+          useSocketJoin();
+          dispatch(receiveCall(remoteMessage?.data));
+        }
+      }
+    });
 
-  //   // App opened from background
-  //   messaging().onNotificationOpenedApp((remoteMessage) => {
-  //     console.log("App opened from background:", remoteMessage?.data);
-  //     if (remoteMessage?.data?.type === "video_call") {
-  //       if (parseInt(remoteMessage?.data?.to_user_id) === userId) {
-  //         useSocketJoin();
-  //         dispatch(receiveCall(remoteMessage?.data));
-  //       }
-  //     }
-  //   });
+    // App opened from background
+    messaging().onNotificationOpenedApp((remoteMessage) => {
+      console.log("App opened from background:", remoteMessage?.data);
+      if (remoteMessage?.data?.type === "video_call") {
+        if (parseInt(remoteMessage?.data?.to_user_id) === userId) {
+          useSocketJoin();
+          dispatch(receiveCall(remoteMessage?.data));
+        }
+      }
+    });
 
-  //   // App opened from quit (cold start)
-  //   messaging()
-  //     .getInitialNotification()
-  //     .then((remoteMessage) => {
-  //       console.log("App opened from quit (cold start):", remoteMessage);
-  //       if (remoteMessage?.data?.type === "video_call") {
-  //         if (parseInt(remoteMessage?.data?.to_user_id) === userId) {
-  //           useSocketJoin();
-  //           dispatch(receiveCall(remoteMessage?.data));
-  //         }
-  //       }
-  //     });
+    // App opened from quit (cold start)
+    messaging()
+      .getInitialNotification()
+      .then((remoteMessage) => {
+        console.log("App opened from quit (cold start):", remoteMessage);
+        if (remoteMessage?.data?.type === "video_call") {
+          if (parseInt(remoteMessage?.data?.to_user_id) === userId) {
+            useSocketJoin();
+            dispatch(receiveCall(remoteMessage?.data));
+          }
+        }
+      });
 
-  //   return unsubscribe;
-  // }, [dispatch]);
+    return unsubscribe;
+  }, [dispatch]);
 
   const handleAccept = () => {
     const data = {

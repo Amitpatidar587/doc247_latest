@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
-import { List } from "react-native-paper";
+import { ActivityIndicator, List, useTheme } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchOrders,
@@ -31,15 +31,18 @@ const Order = () => {
   const statusTabs = ["All", "Pending", "Completed", "Rejected", "Cancelled"];
   const [activeStatus, setActiveStatus] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
+  const {colors} = useTheme();
+
+  console.log(activeStatus)
 
   const getorders = useCallback(() => {
-    dispatch(fetchOrders({ patientId: userId }));
-  }, [dispatch, userId]);
+    dispatch(fetchOrders({ patientId: userId, status: activeStatus }));
+  }, [dispatch, userId, activeStatus]);
 
   useEffect(() => {
     getorders();
     dispatch(fetchFiltername("order_status"));
-  }, [getorders, dispatch]);
+  }, [getorders, dispatch, activeStatus]);
 
   useEffect(() => {
     if (message === null) return;
@@ -140,11 +143,6 @@ const Order = () => {
             </TouchableOpacity>
           ))}
         </View>
-        {filteredOrders.length === 0 && (
-          <View style={styles.noDataContainer}>
-            <Text style={styles.noData}>No orders found</Text>
-          </View>
-        )}
         <FlatList
           data={filteredOrders}
           keyExtractor={(item) => item.id.toString()}
@@ -159,6 +157,26 @@ const Order = () => {
               justifyContent: "center",
             }),
           }}
+          ListEmptyComponent={() =>
+            loading ? (
+              <View
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  minHeight: "100%",
+                }}
+              >
+                <ActivityIndicator size="large" color={colors.primary} />
+              </View>
+            ) : (
+              <View style={styles.emptyContainer}>
+                <Text style={[styles.emptyText, { color: colors.text }]}>
+                  No Vitals Found
+                </Text>
+              </View>
+            )
+          }
         />
       </SafeAreaView>
     </GestureRecognizer>
@@ -252,6 +270,13 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
   },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    // marginTop: "50%",
+  },
+  emptyText: { fontSize: 18, fontWeight: "bold", opacity: 0.6 },
 });
 
 export default Order;

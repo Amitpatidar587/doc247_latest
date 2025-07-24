@@ -18,7 +18,7 @@ import {
 } from "../../../redux/slices/patient/profile/vitalsSlice";
 import { format } from "date-fns";
 import CustomTextInput from "../../../components/forms/CustomTextInput";
-import { useTheme } from "react-native-paper";
+import { ActivityIndicator, useTheme } from "react-native-paper";
 import CustomButton from "../../../components/forms/CustomButton";
 import { useToast } from "../../../components/utility/Toast";
 
@@ -183,24 +183,40 @@ const PatientVitals = () => {
         vitals?.length === 0 ? { paddingBottom: 60 } : { paddingBottom: 60 },
       ]}
     >
-      {vitals?.length === 0 ? (
-        <View style={styles.noVitals}>
-          <Text style={styles.noVitalsText}>No vitals found.</Text>
-        </View>
-      ) : (
-        <FlatList
-          data={vitals}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderVitalsItem}
-          refreshing={refreshing}
-          onRefresh={handleRefresh}
-          contentContainerStyle={{
-            padding: 15,
-            flex: 1,
-            minHeight: "100%",
-          }}
-        />
-      )}
+      <FlatList
+        data={vitals}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderVitalsItem}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
+        contentContainerStyle={{
+          padding: 15,
+          flex: 1,
+          minHeight: "100%",
+        }}
+        ListEmptyComponent={() =>
+          loading ? (
+            <View
+              style={{
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "100%",
+                paddingBottom: 60,
+                marginTop: "45%",
+              }}
+            >
+              <ActivityIndicator size="large" color={colors.primary} />
+            </View>
+          ) : (
+            <View style={styles.emptyContainer}>
+              <Text style={[styles.emptyText, { color: colors.text }]}>
+                No Vitals Found
+              </Text>
+            </View>
+          )
+        }
+      />
 
       <TouchableOpacity style={styles.addButton} onPress={() => openModal()}>
         <Text style={styles.addButtonText}>Add New Vitals</Text>
@@ -360,19 +376,14 @@ const styles = StyleSheet.create({
   },
   cancelText: { textAlign: "center", color: "#777" },
   errorText: { color: "red", marginTop: 5 },
-  noVitals: {
+
+  emptyContainer: {
     flex: 1,
-    textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-    // paddingBottom: 80,
+    // marginTop: "50%",
   },
-  noVitalsText: {
-    textAlign: "center",
-    fontSize: 18,
-    color: "gray",
-    fontWeight: "bold",
-  },
+  emptyText: { fontSize: 18, fontWeight: "bold", opacity: 0.6 },
 });
 
 export default PatientVitals;

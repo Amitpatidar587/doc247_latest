@@ -102,7 +102,7 @@ export const changePassword = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    // user: null,
+    user: null,
     loading: false,
     error: null,
     success: false,
@@ -159,9 +159,11 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(signUp.fulfilled, (state, action) => {
+
+        console.log(action.payload);
         state.loading = false;
-        state.success = true;
-        state.message = "Account created successfully";
+        state.message = action.payload?.message;
+        state.success = action.payload?.success;
       })
       .addCase(signUp.rejected, (state, action) => {
         state.message = "something went wrong";
