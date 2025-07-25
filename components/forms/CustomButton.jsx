@@ -24,14 +24,14 @@ const CustomButton = ({
       minHeight: 36,
     },
     md: {
-      paddingVertical: 9,
+      paddingVertical: 8,
       paddingHorizontal: 20,
       fontSize: 16,
       borderRadius: 50,
       minHeight: 36,
     },
     lg: {
-      paddingVertical: 12,
+      paddingVertical: 10,
       paddingHorizontal: 24,
       fontSize: 18,
       borderRadius: 50,

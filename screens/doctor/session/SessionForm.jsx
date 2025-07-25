@@ -330,18 +330,19 @@ const SessionForm = ({ navigation }) => {
             onChange={(data) => handleUpdate("vitals", data)}
           />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.submitButton}
+            <CustomButton
+              style={[{ width: "50%" }]}
               onPress={() => setVitalsModalVisible(false)}
-            >
-              <Text style={styles.submitButtonText}>Save</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.closeButton, { borderColor: colors.primary }]}
+              title="Save"
+              size="md"
+            />
+            <CustomButton
+              style={[{ width: "50%" }]}
               onPress={() => setVitalsModalVisible(false)}
-            >
-              <Text style={{ color: colors.primary }}>Close</Text>
-            </TouchableOpacity>
+              title="Close"
+              size="md"
+              variant="danger"
+            />
           </View>
         </ScrollView>
       </Modal>
@@ -357,18 +358,19 @@ const SessionForm = ({ navigation }) => {
             onChange={(data) => handleUpdate("diagnosis", data)}
           />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={[styles.submitButton, { backgroundColor: colors.primary }]}
+            <CustomButton
+              style={[{ width: "50%" }]}
               onPress={() => setDiagnosisModalVisible(false)}
-            >
-              <Text style={{ color: colors.background }}>Save</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.closeButton, { borderColor: colors.primary }]}
+              title="Save"
+              size="md"
+            />
+            <CustomButton
+              style={[{ width: "50%" }]}
               onPress={() => setDiagnosisModalVisible(false)}
-            >
-              <Text style={{ color: colors.primary }}>Close</Text>
-            </TouchableOpacity>
+              title="Close"
+              size="md"
+              variant="danger"
+            />
           </View>
         </ScrollView>
       </Modal>
@@ -384,18 +386,19 @@ const SessionForm = ({ navigation }) => {
             onChange={(data) => handleUpdate("prescriptions", data)}
           />
           <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={styles.submitButton}
+            <CustomButton
+              style={[{ width: "50%" }]}
               onPress={() => setPrescriptionsModalVisible(false)}
-            >
-              <Text style={styles.submitButtonText}>Save</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.closeButton, { borderColor: colors.primary }]}
+              title="Save"
+              size="md"
+            />
+            <CustomButton
+              style={[{ width: "50%" }]}
               onPress={() => setPrescriptionsModalVisible(false)}
-            >
-              <Text style={{ color: colors.primary }}>Close</Text>
-            </TouchableOpacity>
+              title="Close"
+              size="md"
+              variant="danger"
+            />
           </View>
         </ScrollView>
       </Modal>
@@ -412,18 +415,19 @@ const SessionForm = ({ navigation }) => {
           />
         </ScrollView>
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={[styles.submitButton, { backgroundColor: colors.primary }]}
+          <CustomButton
+            style={[{ width: "50%" }]}
             onPress={() => setAdditionalModalVisible(false)}
-          >
-            <Text style={{ color: colors.background }}>Save</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.closeButton, { borderColor: colors.primary }]}
+            title="Save"
+            size="md"
+          />
+          <CustomButton
+            style={[{ width: "50%" }]}
             onPress={() => setAdditionalModalVisible(false)}
-          >
-            <Text style={{ color: colors.primary }}>Close</Text>
-          </TouchableOpacity>
+            title="Close"
+            size="md"
+            variant="danger"
+          />
         </View>
       </Modal>
 
@@ -440,26 +444,19 @@ const SessionForm = ({ navigation }) => {
         />
         {/* </ScrollView> */}
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.submitButton}
+          <CustomButton
+            style={[{ width: "50%" }]}
             onPress={() => setPharmacyModalVisible(false)}
-          >
-            <Text style={[styles.saveButtonText, { color: colors.background }]}>
-              Save
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.closeButton,
-              {
-                backgroundColor: colors.background,
-                borderColor: colors.primary,
-              },
-            ]}
+            title="Save"
+            size="md"
+          />
+          <CustomButton
+            style={[{ width: "50%" }]}
             onPress={() => setPharmacyModalVisible(false)}
-          >
-            <Text style={{ color: colors.primary }}>close</Text>
-          </TouchableOpacity>
+            title="Close"
+            size="md"
+            variant="danger"
+          />
         </View>
       </Modal>
 
@@ -495,11 +492,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     elevation: 1,
     width: "48%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   modalButtonText: {
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#333",
   },
   modalContainer: {
     backgroundColor: "#fff",
@@ -510,6 +510,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 16,
     marginBottom: 20,
+    paddingHorizontal: 20,
   },
   closeButton: {
     borderRadius: 50,

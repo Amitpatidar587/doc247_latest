@@ -203,6 +203,10 @@ const AppointmentCard = ({
                   onPress={() => onUpdateStatus(appointment, "approved")}
                   title={"Accept"}
                   size="md"
+                  loading={
+                    loading?.id === appointment?.id &&
+                    loading?.type === "approved"
+                  }
                 />
                 <CustomButton
                   style={[
@@ -214,6 +218,10 @@ const AppointmentCard = ({
                   title={"Reject"}
                   size="md"
                   variant="danger"
+                  loading={
+                    loading?.id === appointment?.id &&
+                    loading?.type === "rejected"
+                  }
                 />
               </>
             ) : (
@@ -228,6 +236,10 @@ const AppointmentCard = ({
                   title={"Cancel"}
                   size="md"
                   variant="danger"
+                  loading={
+                    loading?.id === appointment?.id &&
+                    loading?.type === "cancelled"
+                  }
                 />
               </>
             )}
@@ -413,6 +425,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     marginTop: 10,
+    gap: 10,
   },
   accept: {
     borderWidth: 1,

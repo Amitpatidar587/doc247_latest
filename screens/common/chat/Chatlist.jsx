@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import {  FlatList, RefreshControl, View } from "react-native";
+import { FlatList, RefreshControl, View } from "react-native";
 import ChatListItem from "./ChatListItem";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import {
@@ -7,7 +7,7 @@ import {
   selectedChatUser,
 } from "../../../redux/slices/app_common/utility/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Text } from "react-native-paper";
+import { ActivityIndicator, Text } from "react-native-paper";
 
 const ChatListScreen = () => {
   const navigation = useNavigation();
@@ -87,12 +87,14 @@ const ChatListScreen = () => {
               alignItems: "center",
               minHeight: "100%",
               zIndex: 1,
-              paddingBottom: 30
+              paddingBottom: 30,
             }}
           >
-            <Text style={{ fontSize: 18, fontWeight: "bold", color: "gray" }}>
-              No Chats
-            </Text>
+            {loading ? (
+             <ActivityIndicator size="large"  color={colors.primary}/>
+            ) : (
+              <Text style={styles.emptyText}>No Chats</Text>
+            )}
           </View>
         )}
       />

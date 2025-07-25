@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Picker } from "@react-native-picker/picker";
 import CustomTextInput from "../../../components/forms/CustomTextInput";
+import CustomButton from "../../../components/forms/CustomButton.jsx";
 
 const AddPrescription = ({ prescriptionList = [], onChange }) => {
   const [error, setError] = useState("");
@@ -368,19 +369,11 @@ const AddPrescription = ({ prescriptionList = [], onChange }) => {
         </View>
 
         <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.addButton}
+          <CustomButton
             onPress={handleSavePrescription}
-          >
-            <Text style={styles.buttonText}>
-              {editIndex !== null ? "Update" : "Add"} Prescription
-            </Text>
-            <MaterialCommunityIcons
-              name={editIndex !== null ? "pencil" : "plus-circle-outline"}
-              size={20}
-              color="#fff"
-            />
-          </TouchableOpacity>
+            title={"+ Add Prescription"}
+            size="md"
+          />
         </View>
       </View>
 
