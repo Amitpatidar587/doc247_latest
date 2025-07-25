@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 const DoctorProfileCard = ({ ProfileData }) => {
   return (
     <View style={styles.container}>
@@ -33,7 +34,7 @@ const DoctorProfileCard = ({ ProfileData }) => {
             </Text>
             <Text style={styles.experience}>
               {Math.floor(ProfileData?.total_experience)} Years Experience
-              Overall{" "}
+              Overall
               {/* <Text style={styles.smallText}>(15 years as specialist)</Text> */}
             </Text>
           </View>

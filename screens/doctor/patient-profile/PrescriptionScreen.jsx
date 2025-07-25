@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
+
+import { Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPrescriptions } from "../../../redux/slices/patient/profile/medicalRecordSlice";
 import {

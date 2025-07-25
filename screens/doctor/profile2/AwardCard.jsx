@@ -1,7 +1,6 @@
 import React from "react";
-import { ScrollView, View, Text, StyleSheet } from "react-native";
-import doctorData from "../../../doctor.json";
-
+import { ScrollView, View, StyleSheet } from "react-native";
+import { Text } from "react-native-paper";
 const formatDate = (dateStr) => {
   if (!dateStr) return "N/A";
   const date = new Date(dateStr);

@@ -94,11 +94,11 @@ const reviewsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchReviews.pending, (state) => {
-        state.loading = true;
+        state.fetchloading = true;
         state.error = null;
       })
       .addCase(fetchReviews.fulfilled, (state, action) => {
-        state.loading = false;
+        state.fetchloading = false;
         state.pagination = action.payload.pagination;
 
         // Check if we're appending or replacing
@@ -112,7 +112,7 @@ const reviewsSlice = createSlice({
       })
 
       .addCase(fetchReviews.rejected, (state, action) => {
-        state.loading = false;
+        state.fetchloading = false;
         state.error = action.payload;
       })
 

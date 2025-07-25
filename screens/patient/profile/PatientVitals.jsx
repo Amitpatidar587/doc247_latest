@@ -250,15 +250,17 @@ const PatientVitals = () => {
               <CustomButton
                 title="Save"
                 onPress={handleSave}
-                style={styles.saveButton}
+                style={{ width: "50%" }}
                 loading={loading}
+                size="md"
               />
-              <TouchableOpacity
+              <CustomButton
                 onPress={() => setModalVisible(false)}
-                style={styles.cancelButton}
-              >
-                <Text style={styles.cancelText}>Cancel</Text>
-              </TouchableOpacity>
+                style={{ width: "50%" }}
+                title="Cancel"
+                variant="danger"
+                size="md"
+              />
             </View>
           </View>
         </View>

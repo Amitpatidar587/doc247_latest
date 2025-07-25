@@ -280,20 +280,19 @@ const CustomForm = ({
               title="Save"
               onPress={onSave}
               loading={loading}
-              style={styles.saveButton}
+              style={[{ width: "50%" }]}
+              variant="primary"
+              size="md"
             />
 
             {handleCancel && (
-              <TouchableOpacity
+              <CustomButton
+                title="Cancel"
                 onPress={handleCancel}
-                style={[
-                  styles.cancelButton,
-                  buttonStyles.cancelButton,
-                  { borderColor: "red" },
-                ]}
-              >
-                <Text style={{ color: "red", fontSize: 16 }}> Cancel</Text>
-              </TouchableOpacity>
+                style={[{ width: "50%" }]}
+                variant="danger"
+                size="md"
+              />
             )}
           </View>
         )}
@@ -305,7 +304,6 @@ const CustomForm = ({
 const styles = StyleSheet.create({
   keyboardAvoidingContainer: {
     flex: 1,
-    
   },
   container: {
     flex: 1,

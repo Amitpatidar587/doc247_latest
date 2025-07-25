@@ -1,6 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-
+import { View, StyleSheet, ScrollView } from "react-native";
+import { Text } from 'react-native-paper'
 const formatDate = (dateStr) => {
   if (!dateStr) return "N/A";
   const date = new Date(dateStr);

@@ -11,6 +11,7 @@ export const lightTheme = {
     background: "#ffffff",
     surface: "#ffffff",
     text: "#333333",
+    error: "red",
   },
 };
 

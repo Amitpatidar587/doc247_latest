@@ -5,11 +5,12 @@ import { ActivityIndicator, Text, useTheme } from "react-native-paper";
 const CustomButton = ({
   title,
   onPress,
-  textColor = "#fff",
+  textColor,
   style,
   loading = false,
   disabled = false,
   size = "lg", // sm, md, lg
+  variant = "primary", // primary, danger
 }) => {
   const { colors } = useTheme();
 
@@ -38,7 +39,24 @@ const CustomButton = ({
     },
   };
 
+  // Variant configurations
+  const variantStyles = {
+    primary: {
+      backgroundColor: colors.background,
+      borderColor: colors.primary,
+      textColor: colors.primary,
+      activityIndicatorColor: colors.primary,
+    },
+    danger: {
+      backgroundColor: colors.background,
+      borderColor: colors.error || "#e74c3c",
+      textColor: colors.error || "#e74c3c",
+      activityIndicatorColor: colors.error || "#e74c3c",
+    },
+  };
+
   const currentSizeStyle = sizeStyles[size] || sizeStyles.md;
+  const currentVariantStyle = variantStyles[variant] || variantStyles.primary;
 
   return (
     <TouchableOpacity
@@ -47,8 +65,8 @@ const CustomButton = ({
         styles.button,
         {
           opacity: disabled || loading ? 0.6 : 1,
-          backgroundColor: colors.background,
-          borderColor: colors.primary,
+          backgroundColor: currentVariantStyle.backgroundColor,
+          borderColor: currentVariantStyle.borderColor,
           borderWidth: 1,
           paddingVertical: currentSizeStyle.paddingVertical,
           paddingHorizontal: currentSizeStyle.paddingHorizontal,
@@ -70,14 +88,17 @@ const CustomButton = ({
       >
         {loading ? (
           <>
-            <ActivityIndicator size={"small"} color={colors.primary} />
+            <ActivityIndicator 
+              size={"small"} 
+              color={currentVariantStyle.activityIndicatorColor} 
+            />
           </>
         ) : (
           <Text
             style={[
               styles.text,
               {
-                color: colors.primary,
+                color: textColor || currentVariantStyle.textColor,
                 fontSize: currentSizeStyle.fontSize,
               },
             ]}

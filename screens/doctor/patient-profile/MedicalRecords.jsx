@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
   View,
-  Text,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Modal,
+  Modal
 } from "react-native";
+import { Text, useTheme } from "react-native-paper";
 import Feather from "react-native-vector-icons/Feather.js";
 import PrescriptionScreen from "./PrescriptionScreen.jsx";
 import { formatReadableDate } from "../../../components/hooks/dateHook.js";
@@ -103,14 +103,17 @@ const MedicalRecords = ({ records }) => {
       <Modal
         visible={isModalVisible}
         animationType="slide"
-        presentationStyle="fullScreen"
+        transparent={false}
         statusBarTranslucent={true}
       >
         <View style={styles.modalContainer}>
           <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
             <Feather name="x" size={24} color="#333" />
           </TouchableOpacity>
-          <PrescriptionScreen id={activeRecordId} />
+
+          <View style={{ flex: 1 }}>
+            <PrescriptionScreen id={activeRecordId} />
+          </View>
         </View>
       </Modal>
     </>
@@ -158,6 +161,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     paddingTop: 80,
+    minHeight: "100%",
   },
   closeButton: {
     position: "absolute",

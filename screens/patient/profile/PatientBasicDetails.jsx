@@ -237,7 +237,7 @@ const PatientBasicDetails = () => {
   return (
     <Surface style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.headerContainer}>
-          <ProfileCard userData={patient} onLogOut={onLogout} />
+        <ProfileCard userData={patient} onLogOut={onLogout} />
       </View>
 
       {/* <Divider style={[styles.divider, { backgroundColor: "#f5f5f5" }]} /> */}
@@ -251,7 +251,7 @@ const PatientBasicDetails = () => {
             display: "flex",
             flexDirection: "column",
             gap: 10,
-            padding:5,
+            padding: 5,
             paddingVertical: 10,
           }}
         >
@@ -285,7 +285,11 @@ const PatientBasicDetails = () => {
                 }}
               >
                 <Text
-                  style={{ fontSize: 16, fontWeight: "600", color: colors.primary }}
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "600",
+                    color: colors.primary,
+                  }}
                 >
                   {item.label}:
                 </Text>
@@ -358,11 +362,6 @@ const PatientBasicDetails = () => {
                 loading={loading}
                 handleCancel={() => setModalVisible(false)}
                 style={{ height: "100%" }}
-                // scrollStyle={{ maxHeight: "100%" }}
-                buttonStyles={{
-                  saveButton: { width: 150 },
-                  cancelButton: { width: 150 },
-                }}
               />
             </View>
           </View>

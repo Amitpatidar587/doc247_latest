@@ -26,6 +26,7 @@ import {
 import { format } from "date-fns";
 import { useToast } from "./utility/Toast";
 import { RefreshControl } from "react-native-gesture-handler";
+import CustomButton from "./forms/CustomButton.jsx";
 
 const StarRating = ({ rating, onChange = () => {} }) => (
   <View style={styles.ratingContainer}>
@@ -47,9 +48,8 @@ const Reviews = ({ targetId, targetType, userRolePass }) => {
   const dispatch = useDispatch();
   const { showToast } = useToast();
   const { userRole, userId } = useSelector((state) => state.auth);
-  const { reviews, loading, success, message, pagination } = useSelector(
-    (state) => state.review
-  );
+  const { reviews, fetchloading, success, message, pagination, loading } =
+    useSelector((state) => state.review);
 
   const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
@@ -171,13 +171,16 @@ const Reviews = ({ targetId, targetType, userRolePass }) => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         onEndReached={() => {
-          if (!loading && pagination?.current_page < pagination?.total_pages) {
+          if (
+            !fetchloading &&
+            pagination?.current_page < pagination?.total_pages
+          ) {
             setPage((p) => p + 1);
           }
         }}
         onEndReachedThreshold={0.5}
         ListFooterComponent={
-          loading ? <ActivityIndicator style={{ margin: 10 }} /> : null
+          fetchloading ? <ActivityIndicator style={{ margin: 10 }} /> : null
         }
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
@@ -191,13 +194,10 @@ const Reviews = ({ targetId, targetType, userRolePass }) => {
 
       {userRole === "patient" && (
         <View style={{ marginTop: 20, paddingBottom: 20 }}>
-          <Button
-            mode="contained"
+          <CustomButton
             onPress={() => setModalVisible(true)}
-            style={{ backgroundColor: colors.primary }}
-          >
-            + Add Review
-          </Button>
+            title={"+   Add Review"}
+          />
         </View>
       )}
 
@@ -232,23 +232,21 @@ const Reviews = ({ targetId, targetType, userRolePass }) => {
               }
               placeholderTextColor={colors.text}
             />
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
+            <View style={[styles.buttonContainer, { width: "100%" }]}>
+              <CustomButton
                 onPress={handleSubmitReview}
-                style={[styles.button, { backgroundColor: colors.primary }]}
-              >
-                {loading ? (
-                  <ActivityIndicator size="small" color={colors.background} />
-                ) : (
-                  <Text style={{ color: colors.background }}>Submit</Text>
-                )}
-              </TouchableOpacity>
-              <TouchableOpacity
+                title="Submit"
+                loading={loading}
+                size="md"
+                style={{ width: "50%" }}
+              />
+              <CustomButton
                 onPress={() => setModalVisible(false)}
-                style={[styles.buttonCancel, { borderColor: colors.primary }]}
-              >
-                <Text style={{ color: colors.primary }}>Cancel</Text>
-              </TouchableOpacity>
+                title="Cancel"
+                size="md"
+                style={{ width: "50%" }}
+                variant="danger"
+              />
             </View>
           </View>
         </View>
@@ -303,20 +301,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     gap: 10,
     marginTop: 10,
+    minWidth: "100%",
   },
-  button: {
-    padding: 10,
-    minWidth: 150,
-    borderRadius: 50,
-    alignItems: "center",
-  },
-  buttonCancel: {
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 25,
-    minWidth: 150,
-    alignItems: "center",
-  },
+
   emptyContainer: {
     flex: 1,
     justifyContent: "center",

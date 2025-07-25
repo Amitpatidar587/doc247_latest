@@ -194,71 +194,41 @@ const AppointmentCard = ({
           <View style={styles.actions}>
             {userRole === "doctor" ? (
               <>
-                <TouchableOpacity
+                <CustomButton
                   style={[
-                    styles.accept,
                     {
-                      borderColor: colors.primary,
-                      backgroundColor: "#fff",
-                      borderRadius: 20,
+                      width: "50%",
                     },
                   ]}
                   onPress={() => onUpdateStatus(appointment, "approved")}
-                >
-                  {loading?.id === appointment?.id &&
-                  loading?.type === "approved" ? (
-                    <ActivityIndicator size="small" color={colors.primary} />
-                  ) : (
-                    <Text style={{ color: colors.primary, fontWeight: "bold" }}>
-                      Accept
-                    </Text>
-                  )}
-                </TouchableOpacity>
-                <TouchableOpacity
+                  title={"Accept"}
+                  size="md"
+                />
+                <CustomButton
                   style={[
-                    styles.reject,
                     {
-                      borderWidth: 1,
-                      borderColor: "red",
-                      backgroundColor: "#fff",
-                      borderRadius: 20,
+                      width: "50%",
                     },
                   ]}
                   onPress={() => onUpdateStatus(appointment, "rejected")}
-                >
-                  {loading?.id === appointment?.id &&
-                  loading?.type === "rejected" ? (
-                    <ActivityIndicator size="small" color="red" />
-                  ) : (
-                    <Text style={{ color: "red", fontWeight: "bold" }}>
-                      Reject
-                    </Text>
-                  )}
-                </TouchableOpacity>
+                  title={"Reject"}
+                  size="md"
+                  variant="danger"
+                />
               </>
             ) : (
               <>
-                <TouchableOpacity
+                <CustomButton
                   style={[
-                    styles.cancel,
                     {
-                      borderWidth: 1,
-                      borderColor: "red",
-                      backgroundColor: "#fff",
-                      borderRadius: 20,
+                      width: "50%",
                     },
                   ]}
                   onPress={() => onUpdateStatus(appointment, "cancelled")}
-                >
-                  {loading?.id === appointment?.id &&
-                  loading?.type === "cancelled" ? (
-                    <ActivityIndicator size="small" color="red" />
-                  ) : (
-                    <Text style={{ color: "red", fontWeight: "bold" }}>
-                      Cancel
-                    </Text>
-                  )}
-                </TouchableOpacity>
+                  title={"Cancel"}
+                  size="md"
+                  variant="danger"
+                />
               </>
             )}
           </View>
@@ -277,14 +247,16 @@ const AppointmentCard = ({
               <CustomButton
                 onPress={handleSessionStart}
                 title={"Start Session"}
-                size="sm"
+                size="md"
+                style={{ width: "50%" }}
               />
             )}
 
             <CustomButton
               onPress={handleChatStart}
-              size="sm"
+              size="md"
               title={"Start Chat"}
+              style={{ width: "50%" }}
             ></CustomButton>
           </View>
         )}

@@ -404,14 +404,16 @@ const ChatWindow = ({ navigation }) => {
 
       <View style={styles.inputContainer}>
         <TextInput
-          style={styles.textInput}
+          style={[styles.textInput, { color: colors.primary }]}
           placeholder="Type a message"
+          placeholderTextColor={colors.primary} 
           value={newMessage}
           onChangeText={setNewMessage}
           onSubmitEditing={handleSendMessage}
           returnKeyType="send"
           multiline={false}
         />
+
         <TouchableOpacity style={styles.sendButton} onPress={handleSendMessage}>
           <Text style={styles.sendButtonText}>Send</Text>
         </TouchableOpacity>

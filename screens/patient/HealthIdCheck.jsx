@@ -111,12 +111,17 @@ const HealthIdCheck = () => {
 
       <View style={styles.inputRow}>
         <TextInput
-          style={[styles?.input, !isEditing && styles.disabledInput]}
+          style={[
+            styles.input,
+            !isEditing && styles.disabledInput,
+            { color: colors.text },
+          ]}
           placeholder="Enter Health ID"
           placeholderTextColor="#888"
           value={tempId}
           onChangeText={setTempId}
           editable={isEditing}
+          selectionColor="black" // Cursor color
         />
 
         {!isEditing && !!healthId && (
@@ -140,7 +145,11 @@ const HealthIdCheck = () => {
             onPress={handleSave}
             disabled={trimmedTempId?.length < 8}
           >
-            <Text style={{ color: colors.background }}>Save</Text>
+            {loading ? (
+              <ActivityIndicator color="white" size= "sm" />
+            ) : (
+              <Text style={styles.buttonText}>Save</Text>
+            )}
           </TouchableOpacity>
         )}
       </View>
@@ -184,21 +193,20 @@ const HealthIdCheck = () => {
             onPress={handleVideocall}
             disabled={!isNextEnabled}
             title={"Video Call"}
+            size="lg"
           ></CustomButton>
         ) : (
           <CustomButton
             onPress={() => navigation.navigate("Book")}
             disabled={!isNextEnabled}
             title={"Go to booking page"}
+            size="lg"
           />
         )}
       </View>
     </View>
   );
 };
-
-export default HealthIdCheck;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -219,14 +227,14 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 1,
-    borderColor: "#ccc",
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 8,
+    fontSize: 16,
     backgroundColor: "#fff",
   },
   disabledInput: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: "#fff",
   },
   saveButton: {
     marginLeft: 10,
@@ -285,3 +293,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default HealthIdCheck;
