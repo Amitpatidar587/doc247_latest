@@ -87,7 +87,7 @@ const ChatWindow = ({ navigation }) => {
           setHasMore(false);
         }
       } catch (err) {
-        console.error("Error fetching history:", err);
+        console.log("Error fetching history:", err);
       }
     },
     [
@@ -257,7 +257,7 @@ const ChatWindow = ({ navigation }) => {
 
       await Promise.all([socketPromise, apiPromise]);
     } catch (error) {
-      console.error("Error sending message:", error);
+      console.log("Error sending message:", error);
       // Rollback on error
       setNewMessage(messageContent);
       setMessages((prev) => prev.filter((msg) => msg.id !== localMessage.id));

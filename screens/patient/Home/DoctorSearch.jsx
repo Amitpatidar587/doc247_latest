@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList, Modal, Button} from 'react-native';
+import {View,  StyleSheet, FlatList, Button} from 'react-native';
 import {
   fetchDoctors,
   resetsearchQuery,
@@ -13,6 +13,7 @@ import {
 } from '../../../redux/slices/patient/favoriteSlice';
 import {DoctorCard} from './DoctorCard';
 import {useToast} from '../../../components/utility/Toast';
+import { Modal, Text } from 'react-native-paper';
 
 const DoctorSearch = ({navigation, route}) => {
   const [filterVisible, setFilterVisible] = useState(false);
@@ -45,7 +46,7 @@ const DoctorSearch = ({navigation, route}) => {
     try {
       await dispatch(fetchDoctors(queryParams));
     } catch (error) {
-      console.error('Error fetching doctors:', error);
+      console.log('Error fetching doctors:', error);
     }
   }, [dispatch, filters, searchQuery, userId, isonline]);
 

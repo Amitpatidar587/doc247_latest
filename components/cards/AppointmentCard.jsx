@@ -15,6 +15,7 @@ import { selectedAppointment } from "../../redux/slices/app_common/AppointmentSl
 import { useNavigation } from "@react-navigation/native";
 // import Reviews from "../Reviews";
 import { selectedChatUser } from "../../redux/slices/app_common/utility/chatSlice";
+import CustomButton from "../forms/CustomButton.jsx";
 const DEFAULT_IMAGE = require("../../assets/user.jpg");
 
 const AppointmentCard = ({
@@ -122,8 +123,8 @@ const AppointmentCard = ({
   console.log("appointment", appointment?.patient_image);
   return (
     <>
-      <View style={styles.card}>
-        <View style={styles.row}>
+      <View style={[styles.card, { backgroundColor: colors.background }]}>
+        <View style={[styles.row]}>
           {/* <Text>{imageSource.uri}</Text> */}
           <TouchableOpacity onPress={gotoProfile}>
             <Image source={imageSource} style={styles.image} />
@@ -137,37 +138,48 @@ const AppointmentCard = ({
               style={{
                 display: "flex",
                 flexDirection: "row",
-                gap: 10,
                 flexWrap: "wrap",
+                gap: 8,
               }}
             >
-              <View
-                style={{ flexDirection: "row", gap: 5, alignItems: "center" }}
-              >
-                <EvilIcons name="calendar" size={14} />
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <MaterialCommunityIcons
+                  name="calendar"
+                  size={14}
+                  color={colors.text}
+                  style={{ marginRight: 3 }}
+                />
                 <Text>{fmtDate(appointment?.appointment_date)}</Text>
               </View>
-              <View
-                style={{ flexDirection: "row", gap: 5, alignItems: "center" }}
-              >
-                <MaterialCommunityIcons name="clock-outline" size={14} />
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <MaterialCommunityIcons
+                  name="clock-outline"
+                  size={14}
+                  color={colors.text}
+                  style={{ marginRight: 3 }}
+                />
                 <Text>{fmtTime(appointment?.appointment_time)}</Text>
               </View>
             </View>
             {(appointment?.patient_phone && userRole === "doctor") ||
               (appointment?.doctor_phone && userRole === "patient" && (
-                <>
-                  <MaterialCommunityIcons name="phone-outline" size={14} />
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <MaterialCommunityIcons
+                    name="phone-outline"
+                    size={14}
+                    color={colors.text}
+                    style={{ marginRight: 3 }}
+                  />
                   <Text>
                     {userRole === "doctor"
-                      ? appointment.patient_phone
-                      : appointment.doctor_phone}
+                      ? appointment?.patient_phone
+                      : appointment?.doctor_phone}
                   </Text>
-                </>
+                </View>
               ))}
             {appointment?.visit_type && (
               <View style={{}}>
-                <Text style={{ fontSize: 14, color: "#6c757d" }}>
+                <Text style={{ fontSize: 14, color: colors.text }}>
                   Visit Type: {appointment.visit_type}
                 </Text>
               </View>
@@ -262,58 +274,18 @@ const AppointmentCard = ({
             }}
           >
             {userRole === "doctor" && (
-              <TouchableOpacity
+              <CustomButton
                 onPress={handleSessionStart}
-                style={{
-                  // backgroundColor: colors.primary,
-                  borderWidth: 1,
-                  borderColor: colors.primary,
-                  padding: 10,
-                  borderRadius: 5,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  minWidth: "40%",
-                  flexDirection: "row",
-                  gap: 5,
-                  marginTop: 5,
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="clock-outline"
-                  color={colors.primary}
-                  size={18}
-                />
-                <Text style={{ color: colors.primary, fontWeight: "bold" }}>
-                  Start
-                </Text>
-              </TouchableOpacity>
+                title={"Start Session"}
+                size="sm"
+              />
             )}
 
-            <TouchableOpacity
+            <CustomButton
               onPress={handleChatStart}
-              style={{
-                // backgroundColor: colors.primary,
-                borderWidth: 1,
-                borderColor: colors.primary,
-                padding: 10,
-                borderRadius: 5,
-                alignItems: "center",
-                justifyContent: "center",
-                minWidth: "40%",
-                flexDirection: "row",
-                gap: 5,
-                marginTop: 5,
-              }}
-            >
-              <MaterialCommunityIcons
-                name="chat-outline"
-                color={colors.primary}
-                size={18}
-              />
-              <Text style={{ color: colors.primary, fontWeight: "bold" }}>
-                Chat
-              </Text>
-            </TouchableOpacity>
+              size="sm"
+              title={"Start Chat"}
+            ></CustomButton>
           </View>
         )}
 
@@ -434,7 +406,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     elevation: 2,
-    backgroundColor: "#fff",
   },
   row: { flexDirection: "row", alignItems: "center", gap: 5 },
   image: {
@@ -472,9 +443,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   accept: {
-    backgroundColor: "#E8F5E9",
     borderWidth: 1,
-    borderColor: "#E8F5E9",
     padding: 8,
     borderRadius: 5,
     flex: 1,
@@ -482,7 +451,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   reject: {
-    backgroundColor: "#FFEBEE",
     padding: 8,
     borderRadius: 5,
     flex: 1,
@@ -490,8 +458,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   cancel: {
-    backgroundColor: "#FFEBEE",
-
     padding: 8,
     borderRadius: 5,
     width: "50%",
@@ -500,7 +466,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   delete: {
-    backgroundColor: "#FFCDD2",
     padding: 8,
     borderRadius: 5,
     width: "50%",

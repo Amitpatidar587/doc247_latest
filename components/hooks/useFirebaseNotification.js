@@ -30,7 +30,7 @@ export const useFirebaseNotification = () => {
           console.log('No FCM token received');
         }
       } catch (err) {
-        console.error('Error getting FCM token:', err);
+        console.log('Error getting FCM token:', err);
       }
     };
 

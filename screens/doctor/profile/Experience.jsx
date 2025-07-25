@@ -39,7 +39,7 @@ const ExperienceScreen = () => {
     try {
       dispatch(fetchExperiences({ doctorId: userId }));
     } catch (error) {
-      console.error("Error fetching experiences:", error);
+      console.log("Error fetching experiences:", error);
     }
   }, [dispatch, userId]);
   useEffect(() => {
@@ -157,7 +157,7 @@ const ExperienceScreen = () => {
         closeForm();
       }
     } catch (error) {
-      console.error("Error saving experience:", error);
+      console.log("Error saving experience:", error);
     }
   };
 
@@ -180,7 +180,7 @@ const ExperienceScreen = () => {
       );
       fetchExperiences();
     } catch (error) {
-      console.error("Error deleting experience:", error);
+      console.log("Error deleting experience:", error);
     }
   };
 
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     // elevation: 5,
-    height: "100%",
+    height: "82%",
   },
   buttonContainer: {
     flexDirection: "row",

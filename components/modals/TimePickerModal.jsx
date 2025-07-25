@@ -7,11 +7,8 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import { TextInput, Button, Text, Surface } from "react-native-paper";
-import { useSelector } from "react-redux";
-
+import { TextInput, Button, Text, Surface, useTheme } from "react-native-paper";
 const screenWidth = Dimensions.get("window").width;
-
 const TimePickerModal = ({
   label,
   value,
@@ -20,8 +17,7 @@ const TimePickerModal = ({
   disabled = false,
   minTime = null, // Add minTime support
 }) => {
-  const { theme } = useSelector((state) => state.theme);
-
+  const {colors} = useTheme();
   const initialTime = value ? value.match(/(\d+):(\d+)\s(AM|PM)/) : null;
   const [selectedHour, setSelectedHour] = useState(
     initialTime ? parseInt(initialTime[1], 10) : 9
@@ -72,7 +68,7 @@ const TimePickerModal = ({
           editable={false}
           style={[
             styles.input,
-            { backgroundColor: disabled ? "#e0e0e0" : theme.colors.surface },
+            { backgroundColor: disabled ? "#e0e0e0" : colors.surface },
           ]}
           mode="outlined"
           right={
@@ -95,11 +91,11 @@ const TimePickerModal = ({
           <Surface
             style={[
               styles.timePickerSurface,
-              { backgroundColor: theme.colors.surface },
+              { backgroundColor: colors.surface },
             ]}
             elevation={5}
           >
-            <Text style={[styles.modalTitle, { color: theme.colors.text }]}>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>
               Select Time
             </Text>
 
@@ -108,12 +104,12 @@ const TimePickerModal = ({
               <View
                 style={[
                   styles.pickerColumn,
-                  { backgroundColor: theme.colors.surface },
-                  { borderColor: theme.colors.primary },
+                  { backgroundColor: colors.surface },
+                  { borderColor: colors.primary },
                 ]}
               >
                 <Text
-                  style={[styles.pickerLabel, { color: theme.colors.text }]}
+                  style={[styles.pickerLabel, { color: colors.text }]}
                 >
                   Hour
                 </Text>
@@ -138,8 +134,8 @@ const TimePickerModal = ({
                           styles.pickerItem,
                           selectedHour === hourValue &&
                             !isDisabled && {
-                              backgroundColor: theme.colors.primary + "20",
-                              borderColor: theme.colors.primary,
+                              backgroundColor: colors.primary + "20",
+                              borderColor: colors.primary,
                             },
                         ]}
                       >
@@ -149,7 +145,7 @@ const TimePickerModal = ({
                             isDisabled && { color: "#aaa" },
                             selectedHour === hourValue &&
                               !isDisabled && {
-                                color: theme.colors.primary,
+                                color: colors.primary,
                                 fontWeight: "bold",
                               },
                           ]}
@@ -166,12 +162,12 @@ const TimePickerModal = ({
               <View
                 style={[
                   styles.pickerColumn,
-                  { backgroundColor: theme.colors.surface },
-                  { borderColor: theme.colors.primary },
+                  { backgroundColor: colors.surface },
+                  { borderColor: colors.primary },
                 ]}
               >
                 <Text
-                  style={[styles.pickerLabel, { color: theme.colors.text }]}
+                  style={[styles.pickerLabel, { color: colors.text }]}
                 >
                   Minute
                 </Text>
@@ -192,8 +188,8 @@ const TimePickerModal = ({
                           styles.pickerItem,
                           selectedMinute === m &&
                             !isDisabled && {
-                              backgroundColor: theme.colors.primary + "20",
-                              borderColor: theme.colors.primary,
+                              backgroundColor: colors.primary + "20",
+                              borderColor: colors.primary,
                             },
                         ]}
                       >
@@ -203,7 +199,7 @@ const TimePickerModal = ({
                             isDisabled && { color: "#aaa" },
                             selectedMinute === m &&
                               !isDisabled && {
-                                color: theme.colors.primary,
+                                color: colors.primary,
                                 fontWeight: "bold",
                               },
                           ]}
@@ -220,12 +216,12 @@ const TimePickerModal = ({
               <View
                 style={[
                   styles.pickerColumn,
-                  { backgroundColor: theme.colors.surface },
-                  { borderColor: theme.colors.primary },
+                  { backgroundColor: colors.surface },
+                  { borderColor: colors.primary },
                 ]}
               >
                 <Text
-                  style={[styles.pickerLabel, { color: theme.colors.text }]}
+                  style={[styles.pickerLabel, { color: colors.text }]}
                 >
                   AM/PM
                 </Text>
@@ -247,8 +243,8 @@ const TimePickerModal = ({
                           styles.pickerItem,
                           period === p &&
                             !isDisabled && {
-                              backgroundColor: theme.colors.primary + "20",
-                              borderColor: theme.colors.primary,
+                              backgroundColor: colors.primary + "20",
+                              borderColor: colors.primary,
                             },
                         ]}
                       >
@@ -258,7 +254,7 @@ const TimePickerModal = ({
                             isDisabled && { color: "#aaa" },
                             period === p &&
                               !isDisabled && {
-                                color: theme.colors.primary,
+                                color: colors.primary,
                                 fontWeight: "bold",
                               },
                           ]}

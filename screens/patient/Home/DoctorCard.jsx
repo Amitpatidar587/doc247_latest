@@ -1,12 +1,13 @@
 import { differenceInYears } from "date-fns";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { useTheme } from "react-native-paper";
+import { View, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { Text, useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import doctorImage from "../../../assets/doctor.jpg"; // Import the doctor image
 import { selectedDoctor } from "../../../redux/slices/doctor/doctorSlice";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { useFriendlyDate } from "../../../components/hooks/dateHook";
+import CustomButton from "../../../components/forms/CustomButton.jsx";
 
 export const DoctorCard = ({
   doctor,
@@ -138,7 +139,7 @@ export const DoctorCard = ({
               </View>
             )}
         </View>
-        {(doctor.first_name || doctor.last_name) && (
+        {(doctor?.first_name || doctor?.last_name) && (
           <Text style={styles.doctorName}>
             Dr. {doctor.first_name} {doctor.last_name}
           </Text>
@@ -151,7 +152,7 @@ export const DoctorCard = ({
             justifyContent: "space-between",
           }}
         >
-          {doctor.gender && (
+          {doctor?.gender && (
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
             >
@@ -161,7 +162,7 @@ export const DoctorCard = ({
               </Text>
             </View>
           )}
-          {doctor.d_of_birth && (
+          {doctor?.d_of_birth && (
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 5 }}
             >
@@ -245,22 +246,20 @@ export const DoctorCard = ({
 
         {isonline && isonline === true ? (
           <View style={styles.detailsRow}>
-            <TouchableOpacity
+            <CustomButton
               style={styles.bookButton}
               onPress={() => handleCall(doctor)}
-            >
-              <Text style={styles.bookButtonText}>Call Now</Text>
-            </TouchableOpacity>
+              title={"Call Now"}
+            />
           </View>
         ) : (
           !hideBookingButton && (
             <View style={styles.bookButtonContainer}>
-              <TouchableOpacity
+              <CustomButton
                 style={styles.bookButton}
                 onPress={() => handleBooking(doctor)}
-              >
-                <Text style={styles.bookButtonText}>Book Appointment</Text>
-              </TouchableOpacity>
+                title={"Book Appointment"}
+              />
             </View>
           )
         )}
@@ -325,7 +324,6 @@ const styles = StyleSheet.create({
   },
   bookButton: {
     marginTop: 5,
-    backgroundColor: "#007bff",
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 20,

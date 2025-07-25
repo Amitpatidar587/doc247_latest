@@ -62,7 +62,7 @@ const PatientAppointmentScreen = ({ route }) => {
           })
         );
       } catch (err) {
-        console.error("Failed to fetch appointments:", err);
+        console.log("Failed to fetch appointments:", err);
       }
     },
     [dispatch, userId, userRole, status]
@@ -81,12 +81,11 @@ const PatientAppointmentScreen = ({ route }) => {
   }, [routeStatus]);
 
   useEffect(() => {
-  dispatch(resetAppointmentsList());
-  setPage(1);
-  // fetchAppointments for first page right away
-  fetchAppointment(1);
-}, [statusIndex]);
-
+    dispatch(resetAppointmentsList());
+    setPage(1);
+    // fetchAppointments for first page right away
+    fetchAppointment(1);
+  }, [statusIndex]);
 
   useEffect(() => {
     if (resetting) {
@@ -116,7 +115,7 @@ const PatientAppointmentScreen = ({ route }) => {
         updateAppointment({ appointmentId: appointment.id, status: status })
       );
     } catch (error) {
-      console.error("Failed to update appointment status:", error);
+      console.log("Failed to update appointment status:", error);
     } finally {
       setLoadingIds({ id: null, type: null });
     }
@@ -159,13 +158,18 @@ const PatientAppointmentScreen = ({ route }) => {
       onSwipeLeft={onSwipeLeft}
       onSwipeRight={onSwipeRight}
       config={swipeConfig}
-      style={styles.container}
+      style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <List.Section style={styles.listSection}>
+      <List.Section
+        style={[styles.listSection, { backgroundColor: colors.background }]}
+      >
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.buttonGroup}
+          contentContainerStyle={[
+            styles.buttonGroup,
+            { backgroundColor: colors.background },
+          ]}
         >
           {statusTabs.map((stat, index) => (
             <TouchableOpacity
@@ -234,8 +238,16 @@ const PatientAppointmentScreen = ({ route }) => {
             }
             ListEmptyComponent={() =>
               loading ? (
-                <View style={{flex: 1,  justifyContent: "center", alignItems: "center", minHeight: "100%", paddingBottom: 60, marginTop: "45%"  }}>
-                
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "100%",
+                    paddingBottom: 60,
+                    marginTop: "45%",
+                  }}
+                >
                   <ActivityIndicator size="large" color={colors.primary} />
                 </View>
               ) : (

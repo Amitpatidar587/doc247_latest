@@ -8,7 +8,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { Card, Text, useTheme } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import CustomForm from "../../../components/forms/CustomForm";
 
@@ -25,9 +25,9 @@ import { useToast } from "../../../components/utility/Toast";
 import { RefreshControl } from "react-native-gesture-handler";
 
 const EducationScreen = () => {
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
   const { showToast } = useToast();
+  const { colors } = useTheme();
+
   const { userId } = useSelector((state) => state.auth);
   const { educations, loading, error, success, message, fetchloading } =
     useSelector((state) => state.education);
@@ -41,7 +41,7 @@ const EducationScreen = () => {
     try {
       dispatch(fetchEducation({ doctorId: userId }));
     } catch (error) {
-      console.error("Error fetching education:", error);
+      console.log("Error fetching education:", error);
     }
   }, [dispatch, userId]);
 
@@ -161,7 +161,7 @@ const EducationScreen = () => {
       fetchEducation(); // Refresh the list
       closeForm();
     } catch (error) {
-      console.error("Error saving education:", error);
+      console.log("Error saving education:", error);
     }
   };
 
@@ -184,7 +184,7 @@ const EducationScreen = () => {
         { cancelable: true }
       );
     } catch (error) {
-      console.error("Error deleting education:", error);
+      console.log("Error deleting education:", error);
     }
   };
 
@@ -311,16 +311,9 @@ const EducationScreen = () => {
           )
         }
       />
-      <CustomButton
-        title="+ Add Education"
-        onPress={() => openForm()}
-        style={{
-          backgroundColor: colors.primary,
-          marginVertical: 5,
-          marginHorizontal: 15,
-        }}
-        // style={[styles.addButton, { backgroundColor: colors.primary }]}
-      />
+      <View style={{ paddingHorizontal: 10 }}>
+        <CustomButton title="+ Add Education" onPress={() => openForm()} />
+      </View>
       {/* Modal Form */}
       <Modal visible={modalVisible} animationType="slide" transparent>
         <View style={styles.modalBackground}>
@@ -349,8 +342,7 @@ const EducationScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // padding: 10,
-    paddingBottom: 60,
+    paddingBottom: 70,
   },
   header: {
     flexDirection: "row",

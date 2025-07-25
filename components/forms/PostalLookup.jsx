@@ -7,14 +7,12 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { TextInput, Surface } from "react-native-paper";
+import { TextInput, Surface, useTheme } from "react-native-paper";
 import axios from "axios";
-import { useSelector } from "react-redux";
 import { countries } from "../../countrycode.json"; // Make sure this has `name`, `alpha2`
 
 const PostalCodeLookup = ({ label, onChange, onResult, defaultValue }) => {
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+  const {colors} = useTheme();
 
   const initialCountry =
     countries.find((c) => c.name === defaultValue?.country)?.alpha2 ||

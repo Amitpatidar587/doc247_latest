@@ -18,6 +18,7 @@ import {
 } from "../../../redux/slices/app_common/auth/authSlice";
 import CustomTextInput from "../../../components/forms/CustomTextInput";
 import { useToast } from "../../../components/utility/Toast";
+import CustomButton from "../../../components/forms/CustomButton.jsx";
 
 export default function ChangePasswordScreen() {
   const dispatch = useDispatch();
@@ -115,17 +116,12 @@ export default function ChangePasswordScreen() {
             error={errors.conferm_new_password}
           />
 
-          <TouchableOpacity
-            style={styles.button}
+          <CustomButton
             onPress={handleSubmit}
             disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator color="#fff" />
-            ) : (
-              <Text style={styles.buttonText}>Update Password</Text>
-            )}
-          </TouchableOpacity>
+            title={"Change Password"}
+            loading={loading}
+          ></CustomButton>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -156,7 +152,7 @@ const styles = StyleSheet.create({
     // flexGrow: 1,
     justifyContent: "center",
     backgroundColor: "#fff",
-    marginBottom: 60,
+    // height: "100%",
   },
   card: {
     // backgroundColor: "#ffffff",

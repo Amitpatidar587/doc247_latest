@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-
-} from "react-native";
+import { View, TouchableOpacity, StyleSheet, ScrollView, LayoutAnimation, UIManager } from "react-native";
 import { useTheme, Text, Modal } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -69,7 +63,15 @@ const SignupScreen = ({ navigation, route }) => {
   };
 
   useEffect(() => {
+  if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}, []);
+
+
+  useEffect(() => {
     if (message == null) return;
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     showToast(message, success ? "success" : "error");
     if (success) {
       setShowOtpInput(true);
@@ -100,7 +102,7 @@ const SignupScreen = ({ navigation, route }) => {
       await dispatch(verifyOtp({ email: formData.email, otp })).unwrap();
       navigation.navigate("Login", { role });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
@@ -122,69 +124,75 @@ const SignupScreen = ({ navigation, route }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.title}>Create an Account for {role}</Text>
+      {!showOtpInput && (
+        <View>
+          <CustomTextInput
+            style={styles.input}
+            label="First Name"
+            value={formData.first_name}
+            onChangeText={(text) => handleChange("first_name", text)}
+            editable={!showOtpInput}
+          />
+          {errors.first_name && (
+            <Text style={styles.error}>{errors.first_name}</Text>
+          )}
 
-      <CustomTextInput
-        style={styles.input}
-        label="First Name"
-        value={formData.first_name}
-        onChangeText={(text) => handleChange("first_name", text)}
-        editable={!showOtpInput}
-      />
-      {errors.first_name && (
-        <Text style={styles.error}>{errors.first_name}</Text>
+          <CustomTextInput
+            style={styles.input}
+            label="Last Name"
+            value={formData.last_name}
+            onChangeText={(text) => handleChange("last_name", text)}
+            editable={!showOtpInput}
+          />
+          {errors.last_name && (
+            <Text style={styles.error}>{errors.last_name}</Text>
+          )}
+
+          <CustomTextInput
+            style={styles.input}
+            label="Email"
+            value={formData.email}
+            onChangeText={(text) => handleChange("email", text)}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            editable={!showOtpInput}
+          />
+          {errors.email && <Text style={styles.error}>{errors.email}</Text>}
+
+          <PhoneInput
+            label="Phone Number"
+            defaultValue={{
+              country_code: formData?.country_code || "+1",
+              contact: formData?.contact,
+            }}
+            onChange={handlePhoneChange}
+            editable={!showOtpInput}
+          />
+          {errors.phone && <Text style={styles.error}>{errors.phone}</Text>}
+
+          {role === "doctor" && (
+            <CustomSelect
+              label="Doctor Type"
+              value={formData.doctor_type}
+              options={doctorTypes}
+              onSelect={(value) => handleChange("doctor_type", value)}
+              icon="menu-down"
+            />
+          )}
+
+          <CustomTextInput
+            style={styles.input}
+            label="Password"
+            value={formData.password}
+            onChangeText={(text) => handleChange("password", text)}
+            secureTextEntry
+            editable={!showOtpInput}
+          />
+          {errors.password && (
+            <Text style={styles.error}>{errors.password}</Text>
+          )}
+        </View>
       )}
-
-      <CustomTextInput
-        style={styles.input}
-        label="Last Name"
-        value={formData.last_name}
-        onChangeText={(text) => handleChange("last_name", text)}
-        editable={!showOtpInput}
-      />
-      {errors.last_name && <Text style={styles.error}>{errors.last_name}</Text>}
-
-      <CustomTextInput
-        style={styles.input}
-        label="Email"
-        value={formData.email}
-        onChangeText={(text) => handleChange("email", text)}
-        keyboardType="email-address"
-        autoCapitalize="none"
-        editable={!showOtpInput}
-      />
-      {errors.email && <Text style={styles.error}>{errors.email}</Text>}
-
-      <PhoneInput
-        label="Phone Number"
-        defaultValue={{
-          country_code: formData?.country_code || "+1",
-          contact: formData?.contact,
-        }}
-        onChange={handlePhoneChange}
-        editable={!showOtpInput}
-      />
-      {errors.phone && <Text style={styles.error}>{errors.phone}</Text>}
-
-      {role === "doctor" && (
-        <CustomSelect
-          label="Doctor Type"
-          value={formData.doctor_type}
-          options={doctorTypes}
-          onSelect={(value) => handleChange("doctor_type", value)}
-          icon="menu-down"
-        />
-      )}
-
-      <CustomTextInput
-        style={styles.input}
-        label="Password"
-        value={formData.password}
-        onChangeText={(text) => handleChange("password", text)}
-        secureTextEntry
-        editable={!showOtpInput}
-      />
-      {errors.password && <Text style={styles.error}>{errors.password}</Text>}
-
       {!showOtpInput && (
         <>
           <View style={styles.checkboxContainer}>
@@ -230,7 +238,6 @@ const SignupScreen = ({ navigation, route }) => {
           onPress={handleSignup}
           title="Sign Up"
           disabled={
-            loading ||
             !formData.email ||
             !formData.password ||
             !formData.first_name ||
@@ -284,16 +291,15 @@ const SignupScreen = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 15,
     flexGrow: 1,
     backgroundColor: "#fff",
     justifyContent: "center",
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 30,
-    alignSelf: "center",
+    marginBottom: 10,
     color: "#333",
   },
   input: {

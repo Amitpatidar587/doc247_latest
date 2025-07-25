@@ -76,7 +76,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
       };
       await dispatch(getAvailableSlots(data));
     } catch (error) {
-      console.error("Failed to fetch slots:", error);
+      console.log("Failed to fetch slots:", error);
     }
   };
 
@@ -96,7 +96,7 @@ const BookAppointmentScreen = ({ route, navigation }) => {
       };
       dispatch(createAppointment(payload));
     } catch (error) {
-      console.error("Booking error:", error);
+      console.log("Booking error:", error);
       Alert.alert("Booking Failed", error?.message || "Something went wrong.");
     }
   };

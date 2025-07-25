@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { View, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Modal } from "react-native";
-import { TextInput, Button, Text, Surface } from "react-native-paper";
-import { useSelector } from "react-redux";
+import { TextInput, Button, Text, Surface, useTheme } from "react-native-paper";
 
 const screenWidth = Dimensions.get("window").width;
 
 const CustomSelect = ({ label, value, options = [], onSelect, icon = "menu-down" }, disabled)  => {
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+  const {colors} = useTheme();
   const [visible, setVisible] = useState(false);
   
   // Ensure options are in the correct format

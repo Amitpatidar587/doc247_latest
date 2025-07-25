@@ -40,8 +40,7 @@ const DoctorAvailability = () => {
   const [editingIndex, setEditingIndex] = useState(null);
 
   const DAYS = Object.keys(availability);
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+  const {colors} = useTheme();
 
   // Function to show time picker modal
   const showTimeModal = (day, index, type) => {
@@ -168,7 +167,7 @@ const DoctorAvailability = () => {
 
   const handleSave = async () => {
     if (selectedDay === null || editingIndex === null) {
-      console.error("No valid availability slot selected.");
+      console.log("No valid availability slot selected.");
       return;
     }
 
@@ -176,7 +175,7 @@ const DoctorAvailability = () => {
       const selectedSlot = availability[selectedDay][editingIndex]; // Extract slot safely
 
       if (!selectedSlot || !selectedSlot.start || !selectedSlot.end) {
-        console.error("Invalid availability slot data.");
+        console.log("Invalid availability slot data.");
         return;
       }
 
@@ -189,7 +188,7 @@ const DoctorAvailability = () => {
       };
       const res = await addAvailability(1, availabilityData);
     } catch (error) {
-      console.error("Error saving availability:", error);
+      console.log("Error saving availability:", error);
     }
   };
 

@@ -14,7 +14,7 @@ export const fetchEducation = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.error("Error fetching education:", error);
+      console.log("Error fetching education:", error);
       return rejectWithValue(
         error.response?.data || "Failed to fetch education data"
       ); // Return error details
@@ -33,7 +33,7 @@ export const addEducation = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      console.error("Error adding education:", error);
+      console.log("Error adding education:", error);
       return rejectWithValue(error.response?.data || "Failed to add education"); // Return error details
     }
   }
@@ -50,7 +50,7 @@ export const updateEducation = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.error("Error updating education:", error);
+      console.log("Error updating education:", error);
       return rejectWithValue(
         error.response?.data || "Failed to update education"
       ); // Return error details
@@ -66,7 +66,7 @@ export const deleteEducation = createAsyncThunk(
       const response = await api.delete(`/education/${id}/`);
       return response.data;
     } catch (error) {
-      console.error("Error deleting education:", error);
+      console.log("Error deleting education:", error);
       return rejectWithValue(
         error.response?.data || "Failed to delete education"
       ); // Return error details

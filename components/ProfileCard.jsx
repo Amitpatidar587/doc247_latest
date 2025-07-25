@@ -71,7 +71,7 @@ const ProfileCard = ({ userData, containerStyle = {} }) => {
         showToast(res.message, res.success ? "success" : "error");
       }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
   const calculateAge = (dateOfBirth) => {

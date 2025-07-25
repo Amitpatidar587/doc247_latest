@@ -160,7 +160,7 @@ const DoctorBottomNavigation = () => {
             />
           ),
           headerShown: true,
-          title: "Chat History",
+          title: "Chat",
         }}
       />
       {/* <Tab.Screen

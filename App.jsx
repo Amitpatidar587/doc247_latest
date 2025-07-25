@@ -7,7 +7,7 @@ LogBox.ignoreLogs([
 ]);
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Provider as PaperProvider } from "react-native-paper";
+import { Provider as PaperProvider, useTheme } from "react-native-paper";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { store, persistor } from "./redux/store";
@@ -166,11 +166,13 @@ function MainNavigator() {
     dispatch(rejectCall());
     setTimeout(() => dispatch(hideCallModal()), 2000);
   };
+
+  const { colors } = useTheme();
   return (
     <SafeAreaView
       style={{
         flex: 1,
-        backgroundColor: "#0474ed",
+        backgroundColor: colors.primary,
         paddingTop: StatusBar.currentHeight,
       }}
     >
@@ -247,7 +249,7 @@ export default function App() {
       <AlertProvider>
         <PersistGate loading={null} persistor={persistor}>
           <GestureHandlerRootView style={{ flex: 1 }}>
-            <PaperProvider theme={isDarkMode ? lightTheme : lightTheme}>
+            <PaperProvider theme={isDarkMode ? darkTheme : lightTheme}>
               <ToastProvider>
                 <MainNavigator />
               </ToastProvider>

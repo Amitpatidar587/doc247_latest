@@ -56,7 +56,7 @@ const JitsiPatientMeeting = ({
         }
         return true;
       } catch (err) {
-        console.error("Permission error:", err);
+        console.log("Permission error:", err);
         setError(err.message);
         return false;
       }
@@ -108,7 +108,7 @@ const JitsiPatientMeeting = ({
 
   const handleWebViewError = (syntheticEvent) => {
     const { nativeEvent } = syntheticEvent;
-    console.error("WebView error:", nativeEvent);
+    console.log("WebView error:", nativeEvent);
     setError("Failed to load meeting. Please check your internet connection.");
   };
 
@@ -155,10 +155,10 @@ const JitsiPatientMeeting = ({
             // Check devices
             window.jitsiApi.executeCommand('getAvailableDevices', 'audioinput')
               .then(devices => console.log('Audio devices:', devices))
-              .catch(err => console.error('Device error:', err));
+              .catch(err => console.log('Device error:', err));
 
           } catch (err) {
-            console.error('Audio init error:', err);
+            console.log('Audio init error:', err);
           }
         }
       }

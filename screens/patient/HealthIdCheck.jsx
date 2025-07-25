@@ -15,6 +15,7 @@ import { ActivityIndicator, useTheme } from "react-native-paper";
 import { initiateCall } from "../../redux/slices/app_common/utility/videoCallSlice";
 import { socket } from "../../components/socket/socket";
 import { useToast } from "../../components/utility/Toast";
+import CustomButton from "../../components/forms/CustomButton.jsx";
 const HealthIdCheck = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -48,7 +49,7 @@ const HealthIdCheck = () => {
       setIsEditing(false);
       setNoHealthId(false);
     } catch (error) {
-      console.error("Update failed:", error);
+      console.log("Update failed:", error);
       Alert.alert("Error", "Failed to update Health ID. Please try again.");
     }
   };
@@ -179,27 +180,17 @@ const HealthIdCheck = () => {
 
       <View>
         {selectedDoctor && selectedDoctor?.video_call ? (
-          <TouchableOpacity
-            style={[styles.nextButton, !isNextEnabled && styles.disabledButton]}
+          <CustomButton
             onPress={handleVideocall}
             disabled={!isNextEnabled}
-          >
-            <Text style={{ color: colors.background }}>
-              {loading ? (
-                <ActivityIndicator size="small" color="white" />
-              ) : (
-                " Video Call"
-              )}
-            </Text>
-          </TouchableOpacity>
+            title={"Video Call"}
+          ></CustomButton>
         ) : (
-          <TouchableOpacity
-            style={[styles.nextButton, !isNextEnabled && styles.disabledButton]}
+          <CustomButton
             onPress={() => navigation.navigate("Book")}
             disabled={!isNextEnabled}
-          >
-            <Text style={{ color: colors.background }}>Go to Booking Page</Text>
-          </TouchableOpacity>
+            title={"Go to booking page"}
+          />
         )}
       </View>
     </View>

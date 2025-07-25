@@ -7,8 +7,7 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import { TextInput, Button, Text, Surface } from "react-native-paper";
-import { useSelector } from "react-redux";
+import { TextInput, Button, Text, Surface, useTheme } from "react-native-paper";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -22,7 +21,8 @@ const CustomDatePicker = ({
   disabled = false,
   minDate = null, // 👈 new prop
 }) => {
-  const { theme } = useSelector((state) => state.theme);
+  const { colors } = useTheme();
+
   const today = new Date();
   const parsedMinDate = minDate ? new Date(minDate) : null;
   const initialDate = value ? new Date(value) : new Date();
@@ -60,7 +60,7 @@ const CustomDatePicker = ({
     (_, i) => minYear + i
   );
 
-    // Prevent invalid days
+  // Prevent invalid days
   let maxDays = getDaysInMonth(selectedYear, selectedMonth);
   let validDays = Array.from({ length: maxDays }, (_, i) => i + 1);
   if (selectedYear === currentYear && selectedMonth === today.getMonth() + 1) {
@@ -91,8 +91,6 @@ const CustomDatePicker = ({
   ) {
     validDays = validDays.filter((d) => d >= parsedMinDate.getDate());
   }
-
-
 
   useEffect(() => {
     if (parsedMinDate) {
@@ -130,7 +128,7 @@ const CustomDatePicker = ({
           style={[
             styles.input,
             {
-              backgroundColor: disabled ? "#e0e0e0" : theme.colors.surface,
+              backgroundColor: disabled ? "#e0e0e0" : colors.surface,
             },
           ]}
         />
@@ -147,11 +145,11 @@ const CustomDatePicker = ({
           <Surface
             style={[
               styles.datePickerSurface,
-              { backgroundColor: theme.colors.surface },
+              { backgroundColor: colors.surface },
             ]}
             elevation={5}
           >
-            <Text style={[styles.modalTitle, { color: theme.colors.text }]}>
+            <Text style={[styles.modalTitle, { color: colors.text }]}>
               Select Date
             </Text>
 
@@ -161,13 +159,13 @@ const CustomDatePicker = ({
                 style={[
                   styles.pickerColumn,
                   {
-                    borderColor: theme.colors.primary,
-                    backgroundColor: theme.colors.surface,
+                    borderColor: colors.primary,
+                    backgroundColor: colors.surface,
                   },
                 ]}
               >
                 <Text
-                  style={[styles.pickerLabel, { color: theme.colors.text }]}
+                  style={[styles.pickerLabel, { color: colors.text }]}
                 >
                   Year
                 </Text>
@@ -182,8 +180,8 @@ const CustomDatePicker = ({
                       style={[
                         styles.pickerItem,
                         selectedYear === year && {
-                          backgroundColor: theme.colors.primary + "20",
-                          borderColor: theme.colors.primary,
+                          backgroundColor: colors.primary + "20",
+                          borderColor: colors.primary,
                         },
                       ]}
                     >
@@ -191,7 +189,7 @@ const CustomDatePicker = ({
                         style={[
                           styles.pickerText,
                           selectedYear === year && {
-                            color: theme.colors.primary,
+                            color: colors.primary,
                             fontWeight: "bold",
                           },
                         ]}
@@ -208,13 +206,13 @@ const CustomDatePicker = ({
                 style={[
                   styles.pickerColumn,
                   {
-                    borderColor: theme.colors.primary,
-                    backgroundColor: theme.colors.surface,
+                    borderColor: colors.primary,
+                    backgroundColor: colors.surface,
                   },
                 ]}
               >
                 <Text
-                  style={[styles.pickerLabel, { color: theme.colors.text }]}
+                  style={[styles.pickerLabel, { color: colors.text }]}
                 >
                   Month
                 </Text>
@@ -229,8 +227,8 @@ const CustomDatePicker = ({
                       style={[
                         styles.pickerItem,
                         selectedMonth === month && {
-                          backgroundColor: theme.colors.primary + "20",
-                          borderColor: theme.colors.primary,
+                          backgroundColor: colors.primary + "20",
+                          borderColor: colors.primary,
                         },
                       ]}
                     >
@@ -238,7 +236,7 @@ const CustomDatePicker = ({
                         style={[
                           styles.pickerText,
                           selectedMonth === month && {
-                            color: theme.colors.primary,
+                            color: colors.primary,
                             fontWeight: "bold",
                           },
                         ]}
@@ -255,13 +253,13 @@ const CustomDatePicker = ({
                 style={[
                   styles.pickerColumn,
                   {
-                    borderColor: theme.colors.primary,
-                    backgroundColor: theme.colors.surface,
+                    borderColor: colors.primary,
+                    backgroundColor: colors.surface,
                   },
                 ]}
               >
                 <Text
-                  style={[styles.pickerLabel, { color: theme.colors.text }]}
+                  style={[styles.pickerLabel, { color: colors.text }]}
                 >
                   Day
                 </Text>
@@ -276,18 +274,18 @@ const CustomDatePicker = ({
                       style={[
                         styles.pickerItem,
                         selectedDay === day && {
-                          backgroundColor: theme.colors.primary + "20",
-                          borderColor: theme.colors.primary,
+                          backgroundColor: colors.primary + "20",
+                          borderColor: colors.primary,
                         },
                       ]}
                     >
                       <Text
                         style={[
                           styles.pickerText,
-                          { color: theme.colors.text },
+                          { color: colors.text },
                           selectedDay === day && {
                             fontWeight: "bold",
-                            color: theme.colors.primary,
+                            color: colors.primary,
                           },
                         ]}
                       >
@@ -304,14 +302,14 @@ const CustomDatePicker = ({
               <Button
                 mode="outlined"
                 onPress={hideDatePicker}
-                style={{ borderColor: theme.colors.primary }}
+                style={{ borderColor: colors.primary }}
               >
                 Cancel
               </Button>
               <Button
                 mode="contained"
                 onPress={handleDateConfirm}
-                style={{ backgroundColor: theme.colors.primary }}
+                style={{ backgroundColor: colors.primary }}
               >
                 Confirm
               </Button>

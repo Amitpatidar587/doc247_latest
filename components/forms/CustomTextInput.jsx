@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { TextInput } from "react-native-paper";
-import { useSelector } from "react-redux";
+import { TextInput, useTheme } from "react-native-paper";
 
 const CustomTextInput = ({
   label,
@@ -15,8 +14,7 @@ const CustomTextInput = ({
   editable = true,
   error,
 }) => {
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+  const {colors} = useTheme();
 
   const [inputHeight, setInputHeight] = useState(0);
 

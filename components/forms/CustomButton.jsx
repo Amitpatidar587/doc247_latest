@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, View,  } from "react-native";
-import { Button, ActivityIndicator,Text } from "react-native-paper";
-import { useSelector } from "react-redux";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Text, useTheme } from "react-native-paper";
 
 const CustomButton = ({
   title,
@@ -10,63 +9,99 @@ const CustomButton = ({
   style,
   loading = false,
   disabled = false,
+  size = "lg", // sm, md, lg
 }) => {
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+  const { colors } = useTheme();
+
+  // Size configurations
+  const sizeStyles = {
+    sm: {
+      paddingVertical: 6,
+      paddingHorizontal: 16,
+      fontSize: 14,
+      borderRadius: 50,
+      minHeight: 36,
+    },
+    md: {
+      paddingVertical: 9,
+      paddingHorizontal: 20,
+      fontSize: 16,
+      borderRadius: 50,
+      minHeight: 36,
+    },
+    lg: {
+      paddingVertical: 12,
+      paddingHorizontal: 24,
+      fontSize: 18,
+      borderRadius: 50,
+      minHeight: 30,
+    },
+  };
+
+  const currentSizeStyle = sizeStyles[size] || sizeStyles.md;
 
   return (
-    <Button
-      mode="elevated"
+    <TouchableOpacity
       onPress={onPress}
       style={[
         styles.button,
         {
-          backgroundColor: colors.primary,
           opacity: disabled || loading ? 0.6 : 1,
-        }, // Reduce opacity if disabled or loading
+          backgroundColor: colors.background,
+          borderColor: colors.primary,
+          borderWidth: 1,
+          paddingVertical: currentSizeStyle.paddingVertical,
+          paddingHorizontal: currentSizeStyle.paddingHorizontal,
+          borderRadius: currentSizeStyle.borderRadius,
+          minHeight: currentSizeStyle.minHeight,
+        },
         style,
       ]}
-      contentStyle={styles.content} // Ensures the full button area is clickable
-      labelStyle={styles.label}
-      disabled={loading || disabled}
-      // Disables pointer events to show "disabled" pointer
-      pointerEvents={disabled || loading ? "none" : "auto"}
+      disabled={disabled || loading}
     >
-      <View style={styles.contentWrapper}>
+      <View
+        style={[
+          styles.contentWrapper,
+          {
+            minHeight:
+              currentSizeStyle.minHeight - currentSizeStyle.paddingVertical * 2,
+          },
+        ]}
+      >
         {loading ? (
           <>
-            <ActivityIndicator size="small" color="#fff" />
+            <ActivityIndicator size={"small"} color={colors.primary} />
           </>
         ) : (
-          <Text style={[styles.text, { color: textColor }]}>{title}</Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                color: colors.primary,
+                fontSize: currentSizeStyle.fontSize,
+              },
+            ]}
+          >
+            {title}
+          </Text>
         )}
       </View>
-    </Button>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 50,
-    minWidth: 150, // Ensures button is always visible
-    paddingVertical: 5,
-  },
-  content: {
-    height: 40, // Prevents layout shift
-    justifyContent: "center",
+    borderWidth: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   contentWrapper: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
   },
-  label: {
-    fontSize: 14,
-    textAlign: "center",
-  },
   text: {
-    fontSize: 14,
     fontWeight: "bold",
     textAlign: "center",
   },

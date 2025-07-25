@@ -50,7 +50,7 @@ const LoginScreen = ({ navigation, route }) => {
       const credentials = { email, password, user_type };
       dispatch(logIn(credentials));
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 

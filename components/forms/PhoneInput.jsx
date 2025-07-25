@@ -6,13 +6,11 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
-import { TextInput, Surface, Text } from "react-native-paper";
-import { useSelector } from "react-redux";
+import { TextInput, Surface, Text, useTheme } from "react-native-paper";
 import { countries } from "../../countrycode.json";
 
 const PhoneInput = ({ label, onChange, defaultValue, error }) => {
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+  const {colors} = useTheme();
 
   const initialCode = defaultValue?.country_code || countries[0].callingCode;
   const initialContact = defaultValue?.contact || "";
@@ -40,7 +38,7 @@ const PhoneInput = ({ label, onChange, defaultValue, error }) => {
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.wrapper} >
       <TextInput
         mode="outlined"
         label={label}

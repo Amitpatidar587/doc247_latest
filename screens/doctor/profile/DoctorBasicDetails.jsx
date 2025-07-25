@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import { Divider, Text, Surface } from "react-native-paper";
+import { Divider, Surface, Text, useTheme } from "react-native-paper";
 import CustomForm from "../../../components/forms/CustomForm";
 import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "../../../components/forms/CustomButton";
@@ -28,8 +28,8 @@ const DoctorBasicDetails = () => {
     (state) => state.doctor
   );
   const { showToast } = useToast();
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
+
+  const { colors } = useTheme();
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
   const [userDetails, setUserDetails] = useState({
@@ -49,7 +49,6 @@ const DoctorBasicDetails = () => {
     postal_code: "",
     specialties: "",
     languages_spoken: "",
-
   });
 
   useEffect(() => {
@@ -196,7 +195,7 @@ const DoctorBasicDetails = () => {
       dispatch(reset());
       dispatch(fetchDoctorById(userId));
     } catch (error) {
-      console.error("Error fetching doctor:", error);
+      console.log("Error fetching doctor:", error);
     }
   }, [userId, dispatch]);
 
@@ -235,7 +234,7 @@ const DoctorBasicDetails = () => {
       dispatch(updateDoctor({ id: userId, doctorData: userDetails }));
       setModalVisible(false);
     } catch (error) {
-      console.error("Error updating doctor:", error);
+      console.log("Error updating doctor:", error);
     }
   };
 
@@ -251,9 +250,9 @@ const DoctorBasicDetails = () => {
         <ProfileCard userData={doctor} />
       </View>
 
-      <Divider
+      {/* <Divider
         style={[styles.divider, { backgroundColor: colors.primary + "40" }]}
-      />
+      /> */}
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -264,14 +263,22 @@ const DoctorBasicDetails = () => {
             display: "flex",
             flexDirection: "column",
             gap: 10,
-            paddingHorizontal: 10,
+            padding: 5,
+            paddingVertical: 10,
           }}
         >
-          <View style={{ padding: 10 }}>
+          <View>
             <Text
-              style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}
+              style={[
+                {
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  marginBottom: 10,
+                  color: colors.primary,
+                },
+              ]}
             >
-              Address
+              Complete Information
             </Text>
 
             {[
@@ -290,14 +297,18 @@ const DoctorBasicDetails = () => {
                 }}
               >
                 <Text
-                  style={{ fontSize: 16, fontWeight: "600", color: "#444" }}
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "600",
+                    color: colors.primary,
+                  }}
                 >
                   {item.label}:
                 </Text>
                 <Text
                   style={{
                     fontSize: 16,
-                    color: "#222",
+                    color: colors.text,
                     textTransform: "capitalize",
                     flexShrink: 1,
                     textAlign: "right",
@@ -332,6 +343,7 @@ const DoctorBasicDetails = () => {
               flex: 1,
               borderWidth: 1,
               alignItems: "center",
+              // borderColor: colors.primary,
               borderColor: "red",
               color: "red",
               justifyContent: "center",

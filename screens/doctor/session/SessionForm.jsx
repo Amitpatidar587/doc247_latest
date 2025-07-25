@@ -25,6 +25,7 @@ import { useTheme, ActivityIndicator } from "react-native-paper";
 import { useToast } from "../../../components/utility/Toast";
 import { initiateCall } from "../../../redux/slices/app_common/utility/videoCallSlice.js";
 import { socket } from "../../../components/socket/socket.js";
+import CustomButton from "../../../components/forms/CustomButton.jsx";
 
 const debounce = (func, delay) => {
   let timer;
@@ -463,13 +464,11 @@ const SessionForm = ({ navigation }) => {
       </Modal>
 
       {/* Submit Button */}
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        {loading ? (
-          <ActivityIndicator size="small" color="#fff" />
-        ) : (
-          <Text style={styles.submitButtonText}>End Session</Text>
-        )}
-      </TouchableOpacity>
+      <CustomButton
+        onPress={handleSubmit}
+        loading={loading}
+        title={"End Session"}
+      />
     </ScrollView>
   );
 };
@@ -486,7 +485,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
     padding: 16,
     minHeight: "100%",
-    paddingBottom: 60,
+    paddingBottom: 70,
   },
   modalButton: {
     backgroundColor: "#fff",

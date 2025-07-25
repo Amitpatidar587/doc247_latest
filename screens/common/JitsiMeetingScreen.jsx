@@ -111,7 +111,7 @@ const JitsiMeetingScreen = ({ route }) => {
 
         return true;
       } catch (err) {
-        console.error("Permission error:", err);
+        console.log("Permission error:", err);
         setError(err.message || "Required permissions were not granted");
         return false;
       }
@@ -227,7 +227,7 @@ const JitsiMeetingScreen = ({ route }) => {
           throw new Error("Token not found in response");
         }
       } catch (err) {
-        console.error("Error initializing meeting:", err);
+        console.log("Error initializing meeting:", err);
         setError(err.message || "Failed to load meeting. Please try again.");
       } finally {
         setIsLoading(false);
@@ -239,13 +239,13 @@ const JitsiMeetingScreen = ({ route }) => {
 
   const handleWebViewError = (syntheticEvent) => {
     const { nativeEvent } = syntheticEvent;
-    console.error("WebView error:", nativeEvent);
+    console.log("WebView error:", nativeEvent);
     // Add more detailed error logging
     if (nativeEvent.description) {
-      console.error("Error description:", nativeEvent.description);
+      console.log("Error description:", nativeEvent.description);
     }
     if (nativeEvent.url) {
-      console.error("Error URL:", nativeEvent.url);
+      console.log("Error URL:", nativeEvent.url);
     }
     setError("Failed to load meeting. Please check your internet connection.");
   };
@@ -446,14 +446,14 @@ const JitsiMeetingScreen = ({ route }) => {
                   }
                 })
                 .catch(err => {
-                  console.error('Error getting audio devices:', err);
+                  console.log('Error getting audio devices:', err);
                   if (isAndroid && retryCount < 3) {
                     setTimeout(() => initAudioWithRetry(retryCount + 1), 1000);
                   }
                 });
 
             } catch (audioError) {
-              console.error('Error initializing audio:', audioError);
+              console.log('Error initializing audio:', audioError);
               if (isAndroid && retryCount < 3) {
                 setTimeout(() => initAudioWithRetry(retryCount + 1), 1000);
               }

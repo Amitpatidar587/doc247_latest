@@ -9,7 +9,7 @@ export const fetchMedicalRecords = createAsyncThunk(
       const response = await api.get(`/additional/?patient_id=${patient_id}`);
       return response.data?.data;
     } catch (error) {
-      console.error(error, "error");
+      console.log(error, "error");
       return rejectWithValue(error.response?.data || "Server Error");
     }
   }

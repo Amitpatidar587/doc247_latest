@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
 import { View, StyleSheet, ScrollView, Dimensions } from "react-native";
-import { useSelector } from "react-redux";
 import CustomTabBar from "./CustomTabBar";
+
+import { useTheme } from "react-native-paper";
 
 const screenWidth = Dimensions.get("window").width;
 
 const TabbedScreen = ({ tabs = [], headerComponent }) => {
+  const { colors } = useTheme();
+
   const scrollRef = useRef(null);
   const [activeTab, setActiveTab] = useState(tabs[0]?.name || "");
-  const { theme } = useSelector((state) => state.theme);
 
   const tabNames = tabs.map((tab) => tab.name);
   const currentIndex = tabNames.indexOf(activeTab);
@@ -25,9 +27,7 @@ const TabbedScreen = ({ tabs = [], headerComponent }) => {
   };
 
   return (
-    <View
-      style={[styles.container, { backgroundColor: theme.colors.background }]}
-    >
+    <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
       {headerComponent}
 
@@ -36,11 +36,11 @@ const TabbedScreen = ({ tabs = [], headerComponent }) => {
         tabs={tabs}
         activeTab={activeTab}
         onTabChange={handleTabChange}
-        containerStyle={{ backgroundColor: theme.colors.background }}
-        tabStyle={{ backgroundColor: theme.colors.surface }}
-        activeTabStyle={{ borderBottomColor: theme.colors.primary }}
-        textStyle={{ color: theme.colors.text }}
-        activeTextStyle={{ color: theme.colors.primary }}
+        containerStyle={{ backgroundColor: colors.background }}
+        tabStyle={{ backgroundColor: colors.surface }}
+        activeTabStyle={{ borderBottomColor: colors.primary }}
+        textStyle={{ color: colors.text }}
+        activeTextStyle={{ color: colors.primary }}
       />
 
       {/* Horizontal Swipeable Content */}

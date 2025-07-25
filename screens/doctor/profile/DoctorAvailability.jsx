@@ -33,7 +33,6 @@ const DoctorAvailability = () => {
   const { Slots, loading, error, message, success } = useSelector(
     (state) => state.availability
   );
-  // const { theme } = useSelector((state) => state.theme);
   const { showToast } = useToast();
   const { colors } = useTheme();
   const { userId } = useSelector((state) => state.auth);
@@ -211,7 +210,7 @@ const DoctorAvailability = () => {
         })
       );
     } catch (err) {
-      console.error("Error fetching availability:", err);
+      console.log("Error fetching availability:", err);
     }
   }, [dispatch, selectedDay, userId]);
 
@@ -259,7 +258,7 @@ const DoctorAvailability = () => {
         setModalVisible(false);
       }
     } catch (saveError) {
-      console.error("Error saving availability:", saveError);
+      console.log("Error saving availability:", saveError);
     }
   };
 
@@ -370,15 +369,17 @@ const DoctorAvailability = () => {
           ListHeaderComponent={
             <>
               <View style={styles.tabContent}>
-                <Text style={styles.dayTitle}>{selectedDay}</Text>
+                <Text style={styles.dayText}>{selectedDay}</Text>
                 <Button
-                  mode="contained"
+                  mode="outlined"
                   icon="plus"
                   onPress={() => setModalVisible(true)}
-                  style={[
-                    styles.addButton,
-                    { backgroundColor: colors.primary },
-                  ]}
+                  style={{
+                    borderColor: colors.primary,
+                    borderWidth: 1,
+                    backgroundColor: colors.background,
+                  }}
+                  labelStyle={{ color: colors.primary }}
                 >
                   Add Slot
                 </Button>
@@ -637,6 +638,13 @@ const styles = StyleSheet.create({
     borderTopColor: "#E0E0E0",
     paddingTop: 10,
   },
+  dayText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "black", 
+    marginBottom: 8,
+  },
+
   detailText: {
     display: "flex",
     flexDirection: "row",

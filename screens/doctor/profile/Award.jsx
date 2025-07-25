@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Card, Text } from "react-native-paper";
+import { Card, Text, useTheme } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { format, parseISO } from "date-fns";
 
@@ -28,13 +28,12 @@ import { RefreshControl } from "react-native-gesture-handler";
 
 const Award = () => {
   const dispatch = useDispatch();
-  const { theme } = useSelector((state) => state.theme);
   const { showToast } = useToast();
   const { userId } = useSelector((state) => state.auth);
   const { awards, loading, success, message, error } = useSelector(
     (state) => state.award
   );
-  const colors = theme.colors;
+  const {colors} = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   const [currentAward, setCurrentAward] = useState(null);
 
@@ -105,7 +104,7 @@ const Award = () => {
         dispatch(addAward({ doctor_id: userId, ...currentAward }));
       }
     } catch (error) {
-      console.error("Error saving award:", error);
+      console.log("Error saving award:", error);
     }
   };
 
@@ -127,7 +126,7 @@ const Award = () => {
         { cancelable: true }
       );
     } catch (error) {
-      console.error("Error deleting award:", error);
+      console.log("Error deleting award:", error);
     }
   };
 
@@ -290,7 +289,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  modalContainer: { width: "90%", borderRadius: 10, padding: 20 },
+  modalContainer: { width: "100%", borderRadius: 10, padding: 20 },
   scrollContainer: { flexGrow: 1 },
   emptyContainer: {
     flex: 1,

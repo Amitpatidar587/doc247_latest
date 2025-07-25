@@ -1,4 +1,4 @@
-import { use, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from "react-native";
-import { Divider, Text, Surface } from "react-native-paper";
+import { Divider, Text, Surface, useTheme } from "react-native-paper";
 import CustomForm from "../../../components/forms/CustomForm";
 import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "../../../components/forms/CustomButton";
@@ -26,10 +26,8 @@ const PatientBasicDetails = () => {
   const { patient, loading, error, success, message } = useSelector(
     (state) => state.patient
   );
+  const { colors } = useTheme();
 
-  console.log(" userId", userId);
-  const { theme } = useSelector((state) => state.theme);
-  const colors = theme.colors;
   const { showToast } = useToast();
   const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = useState(false);
@@ -186,7 +184,7 @@ const PatientBasicDetails = () => {
     try {
       dispatch(fetchPatientDetails({ id: userId }));
     } catch (error) {
-      console.error("Error fetching patient:", error);
+      console.log("Error fetching patient:", error);
     }
   }, [dispatch, userId]);
 
@@ -224,7 +222,7 @@ const PatientBasicDetails = () => {
     try {
       dispatch(UpdatePatientDetails({ id: userId, patientData: userDetails }));
     } catch (error) {
-      console.error("Error updating patient:", error);
+      console.log("Error updating patient:", error);
     }
   };
 
@@ -239,12 +237,10 @@ const PatientBasicDetails = () => {
   return (
     <Surface style={[styles.container, { backgroundColor: colors.background }]}>
       <View style={styles.headerContainer}>
-        <Text style={[styles.header, { color: colors.text }]}>
           <ProfileCard userData={patient} onLogOut={onLogout} />
-        </Text>
       </View>
 
-      <Divider style={[styles.divider, { backgroundColor: "#f5f5f5" }]} />
+      {/* <Divider style={[styles.divider, { backgroundColor: "#f5f5f5" }]} /> */}
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -255,14 +251,22 @@ const PatientBasicDetails = () => {
             display: "flex",
             flexDirection: "column",
             gap: 10,
-            paddingHorizontal: 10,
+            padding:5,
+            paddingVertical: 10,
           }}
         >
           <View style={{ padding: 0 }}>
             <Text
-              style={{ fontSize: 18, fontWeight: "bold", marginBottom: 10 }}
+              style={[
+                {
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  marginBottom: 10,
+                  color: colors.primary,
+                },
+              ]}
             >
-              Patient Information
+              Complete Information
             </Text>
 
             {[
@@ -281,14 +285,14 @@ const PatientBasicDetails = () => {
                 }}
               >
                 <Text
-                  style={{ fontSize: 16, fontWeight: "600", color: "#444" }}
+                  style={{ fontSize: 16, fontWeight: "600", color: colors.primary }}
                 >
                   {item.label}:
                 </Text>
                 <Text
                   style={{
                     fontSize: 16,
-                    color: "#222",
+                    color: colors.text,
                     textTransform: "capitalize",
                     flexShrink: 1,
                     textAlign: "right",
@@ -332,7 +336,7 @@ const PatientBasicDetails = () => {
               marginTop: 10,
             }}
           >
-            Logout  
+            Logout
           </Text>
         </TouchableOpacity>
       </ScrollView>
@@ -373,12 +377,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  // headerContainer: {
-  //   flexDirection: "row",
-  //   justifyContent: "space-between",
-  //   alignItems: "center",
-  //   marginBottom: 10,
-  // },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 10,
+    width: "100%",
+  },
   header: {
     fontSize: 18,
     fontWeight: "bold",

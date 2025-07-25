@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from "react-native";
-import { ActivityIndicator, List, useTheme , Text} from "react-native-paper";
+import { ActivityIndicator, List, useTheme, Text } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchOrders,
@@ -30,9 +30,9 @@ const Order = () => {
   const statusTabs = ["All", "Pending", "Completed", "Rejected", "Cancelled"];
   const [activeStatus, setActiveStatus] = useState(0);
   const [refreshing, setRefreshing] = useState(false);
-  const {colors} = useTheme();
+  const { colors } = useTheme();
 
-  console.log(activeStatus)
+  console.log(activeStatus);
 
   const getorders = useCallback(() => {
     dispatch(fetchOrders({ patientId: userId, status: activeStatus }));
@@ -97,16 +97,24 @@ const Order = () => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>{order?.pharmacy_first_name}</Text>
-        <Text style={styles.value}>
-          +{order?.country_code}-{order?.pharmacy_contact}
-        </Text>
-        <Text style={styles.value}>{order?.pharmacy_email}</Text>
-        <Text style={styles.value}>{order?.pharmacy_address}</Text>
+        {order?.pharmacy_first_name && (
+          <Text style={styles.sectionTitle}>{order?.pharmacy_first_name}</Text>
+        )}
+        {order?.pharmacy_contact && (
+          <Text style={styles.value}>
+            +{order?.country_code}-{order?.pharmacy_contact}
+          </Text>
+        )}
+        {order?.pharmacy_email && (
+          <Text style={styles.value}>{order?.pharmacy_email}</Text>
+        )}
+        {order?.pharmacy_address && (
+          <Text style={styles.value}>{order?.pharmacy_address}</Text>
+        )}
       </View>
 
       {activePrescriptionId === order.prescription_group_id && (
-        <PrescriptionView prescriptionGroupId={order.prescription_group_id} />
+        <PrescriptionView prescriptionGroupId={order?.prescription_group_id} />
       )}
       <TouchableOpacity
         onPress={() => handleViewPrescription(order.prescription_group_id)}

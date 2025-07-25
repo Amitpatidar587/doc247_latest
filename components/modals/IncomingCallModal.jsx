@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import PropTypes from "prop-types";
 import { socket } from "../socket/socket";
 import { navigate } from "../../navigationRef";

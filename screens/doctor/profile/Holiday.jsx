@@ -21,6 +21,7 @@ import {
 import { useTheme } from "react-native-paper";
 import { format } from "date-fns";
 import { useToast } from "../../../components/utility/Toast";
+import CustomButton from "../../../components/forms/CustomButton.jsx";
 
 const Holiday = () => {
   const { colors } = useTheme();
@@ -171,27 +172,11 @@ const Holiday = () => {
           paddingTop: 5,
         }}
       >
-        <TouchableOpacity
-          style={[
-            styles.dayOffButton,
-            {
-              borderColor: colors.primary,
-              borderWidth: 1,
-              backgroundColor: "#fff",
-            },
-          ]}
+        <CustomButton
           onPress={() => setModalVisible(true)}
-        >
-          <Icon name="add-circle" size={20} color={colors.primary} />
-          <Text
-            style={[
-              styles.dayOffButtonText,
-              { color: colors.primary, textAlign: "center" },
-            ]}
-          >
-            Add Holiday
-          </Text>
-        </TouchableOpacity>
+          title="+ Add Holiday"
+          textColor={colors.primary}
+        />
       </View>
       {/* Modal */}
       <Modal visible={ModalVisible} animationType="slide" transparent>

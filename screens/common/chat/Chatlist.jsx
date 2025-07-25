@@ -7,6 +7,7 @@ import {
   selectedChatUser,
 } from "../../../redux/slices/app_common/utility/chatSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Text } from "react-native-paper";
 
 const ChatListScreen = () => {
   const navigation = useNavigation();

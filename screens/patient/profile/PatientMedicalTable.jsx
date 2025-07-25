@@ -37,7 +37,7 @@ export default function PatientMedicalTable({ medicalRecord }) {
   //     try {
   //       dispatch(fetchPrescription({ appointmentId }));
   //     } catch (error) {
-  //       console.error("Failed to fetch prescription:", error);
+  //       console.log("Failed to fetch prescription:", error);
   //     }
   //   },
   //   [dispatch]

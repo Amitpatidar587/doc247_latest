@@ -187,11 +187,13 @@ const PatientVitals = () => {
         renderItem={renderVitalsItem}
         refreshing={refreshing}
         onRefresh={handleRefresh}
-        contentContainerStyle={{
-          padding: 15,
-          flex: 1,
-          minHeight: "100%",
-        }}
+        contentContainerStyle={
+          {
+            // padding: 15,
+            // flex: 1,
+            // minHeight: "100%",
+          }
+        }
         ListEmptyComponent={() =>
           loading ? (
             <View
@@ -268,7 +270,7 @@ const PatientVitals = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    // flex: 1,
+    flex: 1,
     minHeight: "100%",
   },
   fieldsContainer: {
@@ -338,41 +340,49 @@ const styles = StyleSheet.create({
   },
   addButtonText: { color: "#007BFF", fontWeight: "bold", fontSize: 16 },
   modalOverlay: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
+    minHeight: "100%",
+    marginBottom: 100,
   },
   modalContainer: {
     backgroundColor: "#fff",
-    borderRadius: 10,
+    // borderRadius: 10,
     padding: 10,
     width: "100%",
-    maxHeight: "90%",
+    paddingVertical: 40,
+    maxHeight: "100%",
   },
-  modalTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 12 },
+  modalTitle: { fontSize: 18, fontWeight: "bold", marginBottom: 8 },
   inputGroup: { marginBottom: 10 },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    paddingVertical: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     gap: 10,
   },
   saveButton: {
+    width: "50%",
     padding: 12,
     borderRadius: 50,
     alignItems: "center",
-    minWidth: 150,
   },
   cancelButton: {
-    flex: 1,
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
-    maxHeight: 50,
-    maxWidth: 150,
+    width: "50%",
+    borderColor: "red",
   },
-  cancelText: { textAlign: "center", color: "#777" },
+  cancelText: {
+    textAlign: "center",
+    color: "red",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
   errorText: { color: "red", marginTop: 5 },
 
   emptyContainer: {

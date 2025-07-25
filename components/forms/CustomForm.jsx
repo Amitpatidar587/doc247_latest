@@ -7,7 +7,7 @@ import {
   Platform,
   TouchableOpacity,
 } from "react-native";
-import {  Text, Switch } from "react-native-paper";
+import { Text, Switch, useTheme } from "react-native-paper";
 import { useSelector } from "react-redux";
 
 import CustomTextInput from "./CustomTextInput";
@@ -33,10 +33,9 @@ const CustomForm = ({
   formColors = {},
   generalError = "",
 }) => {
-  const { theme } = useSelector((state) => state.theme);
   const [errors, setErrors] = useState({});
 
-  const colors = theme.colors;
+  const { colors } = useTheme();
   const mergedColors = {
     primary: formColors.primary || colors.primary,
     border: formColors.border || "#ddd",
@@ -278,14 +277,10 @@ const CustomForm = ({
             ]}
           >
             <CustomButton
-              title="Save Changes"
+              title="Save"
               onPress={onSave}
-              style={[
-                styles.saveButton,
-                { backgroundColor: mergedColors.primary },
-                buttonStyles.saveButton,
-              ]}
               loading={loading}
+              style={styles.saveButton}
             />
 
             {handleCancel && (
@@ -294,10 +289,10 @@ const CustomForm = ({
                 style={[
                   styles.cancelButton,
                   buttonStyles.cancelButton,
-                  { borderColor: mergedColors.primary },
+                  { borderColor: "red" },
                 ]}
               >
-                <Text> Cancel</Text>
+                <Text style={{ color: "red", fontSize: 16 }}> Cancel</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -310,6 +305,7 @@ const CustomForm = ({
 const styles = StyleSheet.create({
   keyboardAvoidingContainer: {
     flex: 1,
+    
   },
   container: {
     flex: 1,
@@ -336,17 +332,22 @@ const styles = StyleSheet.create({
     // maxHeight: 100,
     // borderTopWidth: 1,
   },
-  // saveButton: {
-  //   marginRight: 10,
-  // },
+  saveButton: {
+    width: "50%",
+    borderWidth: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 50,
+    // paddingVertical: 5,
+  },
   cancelButton: {
     flex: 1,
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 50,
-    // maxWidth: 150,
-    // paddingVertical: 5,
+    width: "50%",
+    paddingVertical: 5,
   },
 });
 

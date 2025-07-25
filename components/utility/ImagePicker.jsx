@@ -27,7 +27,7 @@ const ImagePickerComponent = forwardRef(({ onImageSelected }, ref) => {
       }
 
       if (response.errorCode) {
-        console.error("Image Picker Error:", response.errorMessage);
+        console.log("Image Picker Error:", response.errorMessage);
         Alert.alert("Error", response.errorMessage);
         return;
       }
@@ -44,7 +44,7 @@ const ImagePickerComponent = forwardRef(({ onImageSelected }, ref) => {
         console.warn("No image selected");
       }
     } catch (error) {
-      console.error("Image picking error:", error);
+      console.log("Image picking error:", error);
       Alert.alert("Error", "Failed to pick image");
     }
   };
